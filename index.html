@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Group Air Policy &amp; Procedures | Classic Vacations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Classic Vacations brand tokens (Jan 2026 guide)
+   ============================================================ */
+:root{
+  --onyx:#25282C; --pearl:#FBF9F9; --swell:#106E81; --latte:#9A8478;
+  --lush:#A6BB9E; --pamp:#F3776A;
+  --paper:#FFFFFF; --ink:#25282C; --muted:#5B5F64; --line:#E6E1DE; --line-2:#D6CFCA;
+  --swell-t:#E7F1F3; --pamp-t:#FDEBE8; --lush-t:#EEF3EC; --latte-t:#F3EFEC;
+  --swell-d:#0B5566;
+  --route-h:84px;
+  --sans:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;height:100%}
+body{margin:0;background:var(--pearl);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:var(--swell);text-underline-offset:3px}
+a:hover{color:var(--swell-d)}
+:focus-visible{outline:3px solid var(--swell);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.code{font-family:var(--mono);font-size:.88em;font-weight:600;letter-spacing:.02em}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+button{font:inherit;color:inherit}
+h1,h2,h3,h4{font-stretch:78%;letter-spacing:-.005em;line-height:1.08;margin:0}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero{background:var(--onyx);color:var(--pearl);padding:48px 0 44px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:end}
+.hero .org{font-size:14px;color:#CFC6C0;margin:0 0 18px}
+.hero h1{font-size:clamp(68px,12.5vw,176px);font-stretch:64%;font-weight:850;line-height:.84;letter-spacing:-.02em}
+.hero h1 span{display:block;font-size:.34em;font-stretch:80%;font-weight:500;letter-spacing:0;line-height:1.1;margin-top:.35em;color:#E9E3DF}
+.hero .lede{font-size:clamp(18px,1.9vw,21px);line-height:1.45;max-width:36ch;margin:0 0 22px;color:#F1ECE9}
+.hero .lede strong{color:#fff;font-weight:650}
+.find{display:flex;align-items:center;gap:12px;width:100%;height:58px;padding:0 16px 0 18px;border:0;border-radius:14px;background:var(--pearl);color:var(--muted);font-size:17px;cursor:text;text-align:left}
+.find svg{flex:none;color:var(--swell)}
+.find .grow{flex:1}
+.kbd{font-family:var(--mono);font-size:12px;border:1px solid var(--line-2);border-bottom-width:2px;border-radius:6px;padding:2px 7px;color:var(--muted);background:#fff}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.jump button{background:transparent;border:1px solid #4A4E54;color:#EDE7E3;border-radius:999px;padding:7px 14px;font-size:14.5px;cursor:pointer}
+.jump button:hover{border-color:var(--pearl);color:#fff}
+.hero-rule{margin-top:36px;padding-top:16px;border-top:1px solid #3B3F45;display:flex;gap:28px;flex-wrap:wrap;font-size:14.5px;color:#D9D1CB}
+.hero-rule b{color:#fff;font-weight:600}
+
+/* ============================================================
+   Route (sticky lifecycle nav) — the signature element
+   ============================================================ */
+.routebar{position:sticky;top:0;z-index:40;background:rgba(251,249,249,.95);backdrop-filter:saturate(1.2) blur(8px);-webkit-backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line)}
+.routebar-in{display:flex;align-items:center;gap:20px;height:var(--route-h)}
+.route-scroll{flex:1;overflow-x:auto;scrollbar-width:none}
+.route-scroll::-webkit-scrollbar{display:none}
+.route{position:relative;display:grid;grid-template-columns:repeat(8,1fr);min-width:660px;list-style:none;margin:0;padding:0}
+.route-line{position:absolute;left:6.25%;right:6.25%;top:17px;height:2px;background:repeating-linear-gradient(90deg,var(--line-2) 0 6px,transparent 6px 11px)}
+.route-fill{position:absolute;left:0;top:0;height:2px;width:0;background:var(--swell);transition:width .25s ease-out}
+.plane{position:absolute;z-index:2;top:-10px;left:0;width:22px;height:22px;margin-left:-11px;color:var(--swell);transition:left .25s ease-out}
+.route li{position:relative;text-align:center}
+.route a{display:inline-flex;flex-direction:column;align-items:center;gap:7px;text-decoration:none;color:var(--muted);padding:4px 6px;border-radius:8px}
+.route .dot{width:14px;height:14px;border-radius:50%;background:var(--pearl);border:2px solid var(--line-2);margin-top:7px;position:relative;z-index:1;transition:background .2s,border-color .2s}
+.route .lbl{font-size:13.5px;line-height:1.1;white-space:nowrap}
+.route .lbl b{font-weight:650;color:var(--ink);margin-right:3px}
+.route a:hover .lbl{color:var(--ink)}
+.route li.done .dot{background:var(--swell);border-color:var(--swell)}
+.route li.on .dot{background:var(--pearl);border-color:var(--swell);box-shadow:0 0 0 4px var(--swell-t)}
+.route li.on .lbl{color:var(--ink);font-weight:600}
+.find-mini{flex:none;display:flex;align-items:center;gap:10px;border:1px solid var(--line-2);background:#fff;border-radius:10px;height:42px;padding:0 10px 0 12px;cursor:pointer;color:var(--muted);font-size:15px}
+.find-mini:hover{border-color:var(--swell);color:var(--ink)}
+
+/* ============================================================
+   Sections
+   ============================================================ */
+section{scroll-margin-top:calc(var(--route-h) + 12px)}
+.band{padding:64px 0}
+.band-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.band-head h2{font-size:clamp(34px,4.4vw,52px);font-weight:780}
+.band-head p{margin:10px 0 0;max-width:60ch;color:var(--muted);font-size:17.5px}
+
+/* Tool deck */
+.deck{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none;margin-bottom:28px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;background:none;border:0;padding:12px 16px 14px;font-size:17px;font-weight:550;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--swell)}
+.panel[hidden]{display:none}
+.panel-intro{margin:0 0 22px;color:var(--muted);max-width:66ch}
+
+/* Task finder */
+.moments{columns:2 380px;column-gap:48px}
+.moment{break-inside:avoid;margin-bottom:22px}
+.moment h3{font-size:22px;font-weight:700;padding:18px 0 10px;border-bottom:2px solid var(--onyx)}
+.task{border-bottom:1px solid var(--line)}
+.task summary{list-style:none;cursor:pointer;display:flex;gap:12px;align-items:flex-start;padding:13px 2px;font-weight:550;font-size:16.5px}
+.task summary::-webkit-details-marker{display:none}
+.task summary .chev{flex:none;margin-top:4px;transition:transform .2s;color:var(--latte)}
+.task[open] summary .chev{transform:rotate(90deg);color:var(--swell)}
+.task-a{padding:0 2px 16px 28px;color:#3A3E43}
+.task-a p{margin:0 0 8px}
+.golink{display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:0;color:var(--swell);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px;font-size:15.5px}
+.golink:hover{color:var(--swell-d)}
+
+/* Decision paths */
+.paths{display:grid;grid-template-columns:280px 1fr;gap:36px;align-items:start}
+.path-pick{display:flex;flex-direction:column;gap:8px}
+.path-pick button{text-align:left;background:var(--pearl);border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer}
+.path-pick button b{display:block;font-size:17px;font-weight:650;margin-bottom:2px}
+.path-pick button span{font-size:14.5px;color:var(--muted)}
+.path-pick button[aria-pressed="true"]{border-color:var(--onyx);background:var(--onyx);color:var(--pearl)}
+.path-pick button[aria-pressed="true"] span{color:#D8D0CA}
+.stage-card{border:1px solid var(--line-2);border-radius:18px;padding:28px 30px;background:var(--pearl);min-height:320px}
+.trail{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;min-height:10px}
+.trail button{background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:13.5px;color:var(--muted);cursor:pointer;max-width:100%;text-align:left}
+.trail button:hover{border-color:var(--swell);color:var(--ink)}
+.q{font-size:clamp(22px,2.6vw,30px);font-weight:700;margin:0 0 8px;max-width:30ch}
+.q-help{color:var(--muted);margin:0 0 20px;max-width:58ch}
+.opts{display:grid;gap:10px;max-width:560px}
+.opt{text-align:left;background:#fff;border:1.5px solid var(--line-2);border-radius:12px;padding:14px 18px;font-size:16.5px;font-weight:550;cursor:pointer}
+.opt:hover{border-color:var(--swell);background:var(--swell-t)}
+.verdict{border-left:6px solid var(--swell);background:#fff;border-radius:0 14px 14px 0;padding:20px 22px;margin-bottom:18px}
+.verdict.good{border-color:var(--lush)} .verdict.warn{border-color:var(--pamp)} .verdict.info{border-color:var(--swell)}
+.verdict h4{font-size:24px;font-weight:720;margin-bottom:8px}
+.verdict p{margin:0 0 8px;max-width:62ch}
+.verdict .say{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line-2);color:#3A3E43}
+.verdict .say b{font-weight:650}
+.card-actions{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.btn-quiet{background:none;border:1px solid var(--line-2);border-radius:10px;padding:8px 14px;cursor:pointer;font-size:15px}
+.btn-quiet:hover{border-color:var(--onyx)}
+
+/* Carrier board */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{background:#fff;border:1px solid var(--line-2);border-radius:999px;padding:6px 13px;font-size:14.5px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--onyx);border-color:var(--onyx);color:var(--pearl)}
+.board-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+.board{width:100%;border-collapse:collapse;min-width:820px;font-size:15px}
+.board th{text-align:left;font-weight:600;font-size:14px;color:var(--muted);padding:12px 14px;background:var(--pearl);border-bottom:1px solid var(--line)}
+.board td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.board tr:last-child td{border-bottom:0}
+.board tbody tr{cursor:pointer}
+.board tbody tr:hover td{background:#FAFCFC}
+.board tbody tr.sel td{background:var(--swell-t)}
+.board tr.hide{display:none}
+.cx{display:flex;align-items:center;gap:10px}
+.cx input{width:18px;height:18px;accent-color:var(--swell);flex:none}
+.cx .code{display:inline-block;min-width:34px;padding:2px 6px;border-radius:6px;background:var(--onyx);color:var(--pearl);text-align:center;font-size:12.5px}
+.cx b{font-weight:620}
+.yes{color:#3F5E37} .no{color:#A33A2E} .part{color:#6E5A30}
+.compare{margin-top:24px}
+.compare-empty{color:var(--muted);font-size:15.5px;padding:16px 0}
+.compare-grid{display:grid;gap:16px}
+.ccard{border:1px solid var(--line-2);border-radius:16px;background:#fff;overflow:hidden}
+.ccard header{background:var(--onyx);color:var(--pearl);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ccard header h4{font-size:21px;font-weight:700}
+.ccard header button{background:none;border:1px solid #555a60;color:#E9E3DF;border-radius:8px;padding:3px 9px;font-size:13px;cursor:pointer}
+.ccard dl{margin:0;padding:6px 18px 12px}
+.ccard dt{font-weight:650;font-size:13.5px;color:var(--latte);margin-top:12px}
+.ccard dd{margin:2px 0 0;font-size:15px}
+.reference-flag{margin-top:18px;font-size:14.5px;color:var(--muted);max-width:80ch}
+
+/* Routing lanes */
+.route-find{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+.route-find input{flex:1;min-width:220px;height:46px;border:1px solid var(--line-2);border-radius:10px;padding:0 14px;font:inherit;background:#fff}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lane{border-top:4px solid var(--onyx);padding-top:14px}
+.lane.ga{border-color:var(--swell)} .lane.ta{border-color:var(--latte)}
+.lane h3{font-size:24px;font-weight:720}
+.lane .sub{font-size:14.5px;color:var(--muted);margin:4px 0 12px}
+.lane ul{list-style:none;margin:0;padding:0}
+.lane li{padding:9px 0;border-bottom:1px solid var(--line);font-size:15.5px;transition:opacity .15s}
+.lane li.dim{opacity:.22}
+.lane li.hit{font-weight:600}
+.channels{margin-top:34px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--line-2);border-radius:16px;overflow:hidden;background:#fff}
+.channel{padding:18px 18px 20px;border-right:1px solid var(--line)}
+.channel:last-child{border-right:0}
+.channel .when{font-size:14px;color:var(--muted);margin-bottom:6px}
+.channel b{display:block;font-size:17.5px;font-weight:680;margin-bottom:6px;font-stretch:85%}
+.channel p{margin:0;font-size:14.5px;color:#3A3E43}
+
+/* Policy library */
+.pol-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.policies{columns:2 420px;column-gap:40px}
+.policy{break-inside:avoid;padding:16px 0 18px;border-bottom:1px solid var(--line)}
+.policy h4{font-size:19.5px;font-weight:700;margin-bottom:6px;font-stretch:84%}
+.policy p{margin:0 0 6px}
+.policy .why{color:var(--muted);font-size:15px}
+.policy.hide{display:none}
+.policy .stage-tag{font-size:13px;color:var(--latte);font-weight:600}
+
+/* ============================================================
+   Stages
+   ============================================================ */
+.stages{padding-top:24px}
+.stage{display:grid;grid-template-columns:300px 1fr;gap:48px;padding:56px 0;border-top:1px solid var(--line)}
+.stage:first-of-type{border-top:0}
+.stage-side{position:sticky;top:calc(var(--route-h) + 28px);align-self:start}
+.stage-num{font-size:104px;font-weight:850;font-stretch:62%;line-height:.8;color:var(--swell);letter-spacing:-.02em}
+.stage-side h2{font-size:38px;font-weight:780;margin:14px 0 10px}
+.stage-side p{margin:0;color:var(--muted);font-size:16.5px;max-width:30ch}
+.stage-side .owner{margin-top:16px;font-size:14px;color:var(--ink)}
+.stage-side .owner span{display:inline-block;margin:4px 4px 0 0;padding:2px 9px;border-radius:999px;border:1px solid var(--line-2);background:#fff}
+
+.acc{border:1px solid var(--line);background:var(--paper);border-radius:14px;margin-bottom:12px;scroll-margin-top:calc(var(--route-h) + 16px)}
+.acc>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:18px 20px}
+.acc>summary::-webkit-details-marker{display:none}
+.acc>summary h3{flex:1;font-size:21px;font-weight:680;font-stretch:84%}
+.acc>summary .chev{flex:none;color:var(--latte);transition:transform .2s}
+.acc[open]>summary .chev{transform:rotate(90deg);color:var(--swell)}
+.acc[open]{border-color:var(--line-2)}
+.link-btn{flex:none;background:none;border:1px solid transparent;border-radius:8px;padding:5px 8px;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13.5px;opacity:0;transition:opacity .15s}
+.acc>summary:hover .link-btn,.acc>summary:focus-within .link-btn,.link-btn:focus-visible{opacity:1}
+.link-btn:hover{border-color:var(--line-2);color:var(--ink)}
+.body{padding:0 20px 22px 20px;max-width:760px}
+.body>*:first-child{margin-top:0}
+.body p{margin:0 0 14px}
+.body ul,.body ol{margin:0 0 14px;padding-left:22px}
+.body li{margin-bottom:5px}
+.body h4{font-size:17.5px;font-weight:680;margin:22px 0 8px;font-stretch:86%}
+.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%{box-shadow:0 0 0 0 rgba(16,110,129,.0)}15%{box-shadow:0 0 0 6px rgba(16,110,129,.28)}100%{box-shadow:0 0 0 0 rgba(16,110,129,0)}}
+
+.note{border-left:4px solid var(--swell);background:var(--swell-t);border-radius:0 10px 10px 0;padding:13px 16px;margin:0 0 16px}
+.note p:last-child{margin-bottom:0}
+.note.watch{border-color:var(--pamp);background:var(--pamp-t)}
+.note.say{border-color:var(--latte);background:var(--latte-t)}
+.note.held{border-color:var(--lush);background:var(--lush-t)}
+.note b.lead{font-weight:680}
+
+.eg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:0 0 16px}
+.eg div{border:1px dashed var(--line-2);border-radius:12px;padding:12px 14px;background:var(--pearl);font-size:15px}
+.eg .code{display:block;font-size:14px;margin-bottom:4px;color:var(--onyx)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 16px}
+.split>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--pearl)}
+.split h5{margin:0 0 6px;font-size:16.5px;font-weight:700;font-stretch:86%}
+.split p{margin:0 0 6px;font-size:15.5px}
+.tbl{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:15px}
+.tbl th,.tbl td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-weight:620;color:var(--muted);font-size:14px;background:var(--pearl)}
+.milestones{list-style:none;padding:0;margin:0 0 18px;display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:m}
+.milestones li{position:relative;padding:34px 8px 0 0;font-size:14.5px;font-weight:600;counter-increment:m}
+.milestones li::before{content:counter(m);position:absolute;top:0;left:0;width:24px;height:24px;border-radius:50%;background:var(--onyx);color:var(--pearl);font-size:12.5px;display:grid;place-items:center;font-weight:600}
+.milestones li::after{content:"";position:absolute;top:11px;left:30px;right:6px;height:2px;background:var(--line-2)}
+.milestones li:last-child::after{display:none}
+.namelist{font-family:var(--mono);font-size:14px;background:var(--onyx);color:var(--pearl);border-radius:12px;padding:14px 18px;margin:0 0 16px;line-height:1.75}
+.namelist .grp{display:block;color:#A9C6CD}
+
+/* Traps */
+.traps{background:var(--onyx);color:var(--pearl)}
+.traps .band-head p{color:#CFC6C0}
+.trap-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
+.trap{padding:16px 0;border-bottom:1px solid #3B3F45;display:grid;grid-template-columns:1fr;gap:4px}
+.trap .m{font-weight:640;font-size:17px;color:#fff}
+.trap .f{color:#D9D1CB;font-size:15.5px}
+.trap button{justify-self:start;background:none;border:0;padding:0;color:#8FD0DD;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:14.5px;margin-top:2px}
+
+/* Checklists */
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.checkset{background:#fff;border:1px solid var(--line);border-radius:6px 20px 6px 6px;padding:18px 18px 12px}
+.checkset h3{font-size:21px;font-weight:700;margin-bottom:10px;font-stretch:84%}
+.checkset label{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-top:1px solid var(--line);font-size:15.5px;cursor:pointer}
+.checkset input{width:18px;height:18px;margin-top:2px;accent-color:var(--swell);flex:none}
+.checkset input:checked+span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line-2)}
+.check-head-actions{display:flex;gap:10px}
+
+footer{padding:40px 0 60px;color:var(--muted);font-size:14.5px;border-top:1px solid var(--line)}
+footer p{margin:0 0 8px;max-width:80ch}
+
+/* ============================================================
+   Search palette
+   ============================================================ */
+.palette{position:fixed;inset:0;z-index:100;background:rgba(37,40,44,.55);display:none;align-items:flex-start;justify-content:center;padding:9vh 16px 16px}
+.palette.open{display:flex}
+.pal{width:min(720px,100%);background:#fff;border-radius:18px;box-shadow:0 30px 80px rgba(20,22,25,.35);overflow:hidden;display:flex;flex-direction:column;max-height:80vh}
+.pal-top{display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid var(--line)}
+.pal-top svg{color:var(--swell);flex:none}
+.pal-top input{flex:1;border:0;outline:0;height:62px;font:inherit;font-size:19px;background:transparent}
+.pal-results{overflow:auto;padding:6px}
+.res{display:block;width:100%;text-align:left;background:none;border:0;border-radius:12px;padding:12px 14px;cursor:pointer}
+.res[aria-selected="true"],.res:hover{background:var(--swell-t)}
+.res .where{font-size:13px;color:var(--latte);font-weight:600}
+.res .t{font-size:17px;font-weight:650;margin:1px 0 3px}
+.res .s{font-size:14.5px;color:var(--muted);line-height:1.45}
+.res mark{background:#FBE0B8;color:inherit;border-radius:3px;padding:0 1px}
+.pal-empty{padding:22px 18px;color:var(--muted)}
+.pal-empty b{color:var(--ink)}
+.pal-foot{border-top:1px solid var(--line);padding:9px 16px;font-size:13px;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap}
+.pal-suggest{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--onyx);color:var(--pearl);padding:10px 16px;border-radius:10px;font-size:15px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:120}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width:1000px){
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .paths{grid-template-columns:1fr}
+  .path-pick{flex-direction:row;overflow-x:auto}
+  .path-pick button{flex:none;width:240px}
+  .lanes{grid-template-columns:1fr}
+  .channels{grid-template-columns:1fr 1fr}
+  .channel:nth-child(2){border-right:0}
+  .channel:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .stage{grid-template-columns:1fr;gap:20px;padding:44px 0}
+  .stage-side{position:static}
+  .stage-num{font-size:76px}
+}
+@media (max-width:760px){
+  body{font-size:16px}
+  .wrap{padding:0 18px}
+  .trap-list{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .milestones{grid-template-columns:1fr;gap:10px}
+  .milestones li{padding:2px 0 0 36px}
+  .milestones li::after{display:none}
+  .find-mini .word,.find-mini .kbd{display:none}
+  .stage-card{padding:22px 18px}
+  .band{padding:48px 0}
+  .link-btn{opacity:1}
+  .link-btn .word{display:none}
+  .channels{grid-template-columns:1fr}
+  .channel{border-right:0;border-bottom:1px solid var(--line)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+}
+@media print{
+  .routebar,.tabs,.jump,.find,.palette,.link-btn,.check-head-actions{display:none!important}
+  .panel[hidden]{display:block!important}
+  .hero{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="org">Classic Vacations · Reservations</p>
+        <h1>Group Air<span>Policy &amp; procedures</span></h1>
+      </div>
+      <div>
+        <p class="lede">Ten travelers on a shared flight changes who sets the rules. <strong>It's the airline's contract now, and every deadline in it has a price.</strong></p>
+        <button class="find" type="button" data-open-search aria-label="Search the guide">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <span class="grow">Search deposits, deviations, name changes…</span>
+          <span class="kbd">/</span>
+        </button>
+        <div class="jump" aria-label="Jump to a tool">
+          <button type="button" data-tab-go="tasks">Find a task</button>
+          <button type="button" data-tab-go="paths">Decision paths</button>
+          <button type="button" data-tab-go="carriers">Carrier rules</button>
+          <button type="button" data-tab-go="owners">Who owns it</button>
+          <button type="button" data-tab-go="policies">Policy library</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-rule">
+      <div><b>10+ travelers</b> on the same itinerary or one common flight</div>
+      <div><b>24 business hours</b> for a Group Air response</div>
+      <div><b>One email thread</b> from request to return</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     ROUTE (sticky lifecycle navigation)
+     ============================================================ -->
+<nav class="routebar" aria-label="Group Air lifecycle">
+  <div class="wrap routebar-in">
+    <div class="route-scroll">
+      <ol class="route" id="route">
+        <div class="route-line" aria-hidden="true">
+          <div class="route-fill" id="routeFill"></div>
+          <svg class="plane" id="plane" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path transform="rotate(90 12 12)" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+        </div>
+      </ol>
+    </div>
+    <button class="find-mini" type="button" data-open-search aria-label="Search the guide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="word">Search</span><span class="kbd">/</span>
+    </button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============================================================
+     TOOL DECK
+     ============================================================ -->
+<section class="deck band" id="tools">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <h2>Mid-call answers</h2>
+        <p>The advisor is waiting. Start here, get the answer, and open the full procedure only if you need it.</p>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Tools">
+      <button class="tab" role="tab" id="tab-tasks" aria-controls="panel-tasks" aria-selected="true">Find a task</button>
+      <button class="tab" role="tab" id="tab-paths" aria-controls="panel-paths" aria-selected="false" tabindex="-1">Decision paths</button>
+      <button class="tab" role="tab" id="tab-carriers" aria-controls="panel-carriers" aria-selected="false" tabindex="-1">Carrier rules</button>
+      <button class="tab" role="tab" id="tab-owners" aria-controls="panel-owners" aria-selected="false" tabindex="-1">Who owns it</button>
+      <button class="tab" role="tab" id="tab-policies" aria-controls="panel-policies" aria-selected="false" tabindex="-1">Policy library</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-tasks" aria-labelledby="tab-tasks">
+      <p class="panel-intro">Grouped by where you are in the conversation. Open a question for the short answer.</p>
+      <div class="moments" id="moments"></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-paths" aria-labelledby="tab-paths" hidden>
+      <p class="panel-intro">Answer a few questions and land on the right next step, with the words to use.</p>
+      <div class="paths">
+        <div class="path-pick" id="pathPick"></div>
+        <div class="stage-card" id="pathCard" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-carriers" aria-labelledby="tab-carriers" hidden>
+      <p class="panel-intro">Filter to what the advisor needs, then tick up to three carriers to compare side by side.</p>
+      <div class="filters" id="carrierFilters"></div>
+      <div class="board-wrap">
+        <table class="board" id="board">
+          <thead><tr><th scope="col">Carrier</th><th scope="col">Qualifies when</th><th scope="col">Deviations</th><th scope="col">Name changes</th><th scope="col">Deposit</th><th scope="col">Check-in</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="compare" id="compare"></div>
+      <p class="reference-flag" id="carriers-supported"><b>Reference only.</b> Carrier rules change without notice. The terms Group Air sends for the actual reservation always win. Frontier (F9) is not supported for Group Air or FIT air through this process. Unsure whether a carrier can be supported? Ask Group Air.</p>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-owners" aria-labelledby="tab-owners" hidden>
+      <p class="panel-intro">You are the advisor's point of contact from start to finish. Group Air works the airline side. Type a task to see whose lane it's in.</p>
+      <div class="route-find">
+        <label class="sr" for="ownerFind">Find who owns a task</label>
+        <input id="ownerFind" type="search" placeholder="e.g. deposit, schedule change, name list, PNR">
+      </div>
+      <div class="lanes" id="lanes"></div>
+      <div class="channels" id="channels"></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-policies" aria-labelledby="tab-policies" hidden>
+      <p class="panel-intro">The non-negotiables, each with the reason behind it. Filter by stage.</p>
+      <div class="pol-filters" id="polFilters"></div>
+      <div class="policies" id="policies"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STAGES
+     ============================================================ -->
+<div class="wrap stages" id="stages">
+
+<!-- STAGE 1 -->
+<section class="stage" id="stage-1" data-stage="1">
+  <div class="stage-side">
+    <div class="stage-num">1</div>
+    <h2>Identify</h2>
+    <p>Before anyone talks price, figure out whether the airline considers this a group.</p>
+    <div class="owner">Owned by <span>You</span></div>
+  </div>
+  <div>
+    <details class="acc" id="qualify" data-title="What qualifies as Group Air">
+      <summary><h3>What qualifies as Group Air</h3></summary>
+      <div class="body">
+        <p>Group Air is generally required when <b>10 or more passengers</b> are traveling together on the same itinerary, or share at least one qualifying common flight.</p>
+        <p>That rule comes from the airline, not from Classic. Airline Group Departments use it to manage inventory and flight loads.</p>
+        <h4>Same itinerary</h4>
+        <div class="eg"><div><span class="code">LAX → CUN → LAX</span>12 passengers traveling together. Group Air.</div></div>
+        <h4>Different origins, one common flight</h4>
+        <div class="eg">
+          <div><span class="code">TUL → DFW → PUJ</span>7 passengers</div>
+          <div><span class="code">OKC → DFW → PUJ</span>3 passengers</div>
+          <div><span class="code">DFW → PUJ</span>All 10 share this flight. May qualify.</div>
+        </div>
+        <p>Carrier requirements vary. Once the total group reaches 10 or more with a common itinerary or shared flight, submit it to Group Air for evaluation and let them confirm.</p>
+      </div>
+    </details>
+
+    <details class="acc" id="count-party" data-title="Count the entire traveling group">
+      <summary><h3>Count the entire traveling group</h3></summary>
+      <div class="body">
+        <p>Don't count one Classic booking. Count everyone traveling together.</p>
+        <div class="eg">
+          <div><span class="code">Booking 1</span>4 passengers</div>
+          <div><span class="code">Booking 2</span>4 passengers</div>
+          <div><span class="code">New request</span>4 more passengers. The group is now 12.</div>
+        </div>
+        <p>The new request goes through Group Air, even though no single booking holds 10 people.</p>
+        <div class="note watch"><p><b class="lead">Don't split to avoid it.</b> Dividing a larger group into several smaller FIT bookings works around the airline's rule, not ours. Keep it together and send it to Group Air.</p></div>
+      </div>
+    </details>
+
+    <details class="acc" id="not-fit" data-title="Why Group Air is different from FIT air">
+      <summary><h3>Why Group Air is different from FIT air</h3></summary>
+      <div class="body">
+        <p>Group Air is not FIT airfare for more people. It's a separate contract with its own clock. Depending on the carrier, it can include:</p>
+        <ul>
+          <li>Contract acceptance deadline</li>
+          <li>Deposit amount and deposit deadline</li>
+          <li>Cancellation rules and a space-reduction allowance</li>
+          <li>Passenger-name deadline and ticketing/final-payment deadline</li>
+          <li>Name-change and deviation policies</li>
+          <li>Seating process and schedule-change protections</li>
+        </ul>
+        <div class="note held"><p><b class="lead">The real advantage.</b> Many carriers allow a full passenger replacement within set limits. That's a name change, not a name correction, and it's generally not possible on standard FIT air.</p></div>
+        <h4>What Group Air is not</h4>
+        <ul>
+          <li><b>Not a guaranteed discount.</b> Group and FIT pricing can be similar. Compare FIT fares while researching if it helps, but never promise Group Air will be cheaper.</li>
+          <li><b>Usually no child fare.</b> Most contracts price adults and children at the same group fare.</li>
+          <li><b>Not refundable.</b> All Group Air tickets are considered non-refundable under current guidance. Cancellation penalties vary by carrier.</li>
+        </ul>
+        <div class="note say"><p><b class="lead">Say it like this.</b> "Group Air isn't about a lower fare. It's about protection: held space, a contract, and in many cases the ability to swap a traveler if plans change. I'll get you the exact terms so you can decide."</p></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- STAGE 2 -->
+<section class="stage" id="stage-2" data-stage="2">
+  <div class="stage-side">
+    <div class="stage-num">2</div>
+    <h2>Request</h2>
+    <p>Group Air quotes what you send. Send a decision, not a search.</p>
+    <div class="owner">Owned by <span>You</span><span>Advisor</span></div>
+  </div>
+  <div>
+    <details class="acc" id="research" data-title="Research the flights first">
+      <summary><h3>Research the flights first</h3></summary>
+      <div class="body">
+        <p>Don't ask Group Air to "look for flights." Do the research, then let the advisor choose.</p>
+        <h4>1. Research options in Plex or an approved flight-shopping resource</h4>
+        <ul>
+          <li>Sensible routing and the preferred carrier, if there is one</li>
+          <li>Reasonable departure and arrival times</li>
+          <li>The specific flight numbers</li>
+          <li>FIT pricing for comparison, when useful</li>
+        </ul>
+        <h4>2. Review the options with the advisor</h4>
+        <p>Ask which itinerary they want quoted. Don't pass several undefined possibilities to Group Air when the advisor hasn't picked a schedule.</p>
+        <h4>3. Gather the group information</h4>
+        <p>Everything in the request form, below. Collect it before you submit so nothing comes back for a second round.</p>
+      </div>
+    </details>
+
+    <details class="acc" id="request-info" data-title="What the request must include">
+      <summary><h3>What the request must include</h3></summary>
+      <div class="body">
+        <table class="tbl">
+          <thead><tr><th>Field</th><th>What to provide</th></tr></thead>
+          <tbody>
+            <tr><td>Group name</td><td>Standard naming convention (see Group name standard)</td></tr>
+            <tr><td>Group type</td><td>Leisure, wedding, incentive, corporate, etc.</td></tr>
+            <tr><td>Main booking number</td><td>Primary/master Classic booking number</td></tr>
+            <tr><td>Airline</td><td>Requested carrier</td></tr>
+            <tr><td>Origin / destination</td><td>Departure and arrival cities or airports</td></tr>
+            <tr><td>Travel dates</td><td>Outbound and return</td></tr>
+            <tr><td>Desired itinerary</td><td>Flight numbers and the complete schedule</td></tr>
+            <tr><td>Adults / children / infants</td><td>Totals, plus ages at time of travel for children and infants</td></tr>
+            <tr><td>Infant seating</td><td>Lap infant, or infant occupying a seat</td></tr>
+            <tr><td>Group agent</td><td>You, the Classic Reservation Agent</td></tr>
+            <tr><td>Email</td><td>Your Classic email address</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="acc" id="group-name" data-title="Group name standard">
+      <summary><h3>Group name standard</h3></summary>
+      <div class="body">
+        <p>Group Air needs a group name to get the quote or contract. Keep it simple and easy to spot.</p>
+        <div class="note"><p><b class="lead">Standard:</b> <span class="code">PRIMARY TRAVELER/ORGANIZER LAST NAME + GROUP TYPE</span></p></div>
+        <div class="eg">
+          <div><span class="code">GOMEZ WEDDING</span></div>
+          <div><span class="code">SMITH FAMILY</span></div>
+          <div><span class="code">JONES INCENTIVE</span></div>
+          <div><span class="code">WILSON CORPORATE</span></div>
+        </div>
+        <ul>
+          <li>No clear group type? Use <span class="code">LAST NAME + GROUP</span>, for example <span class="code">BROWN GROUP</span>.</li>
+          <li>No primary traveler or organizer yet? The advisor's last name may be used.</li>
+          <li>Skip dates, destinations, and punctuation unless you need them to tell two groups apart.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="acc" id="passengers" data-title="Passenger counts, children and infants">
+      <summary><h3>Passenger counts, children and infants</h3></summary>
+      <div class="body">
+        <p>Always give Group Air the number of adults, children, and infants, with ages at time of travel for children and infants.</p>
+        <div class="split">
+          <div><h5>Lap infant</h5><p>No seat required.</p></div>
+          <div><h5>Infant in a seat</h5><p>Counts as one of the spaces requested from the airline.</p></div>
+        </div>
+        <div class="note watch"><p><b class="lead">Don't assume a child discount.</b> Adult and child Group Air pricing is often the same.</p></div>
+      </div>
+    </details>
+
+    <details class="acc" id="submit" data-title="Submit the Group Air Request Form">
+      <summary><h3>Submit the Group Air Request Form</h3></summary>
+      <div class="body">
+        <p>Submit through the approved Group Air Request Form (Smartsheet)<span id="formLinkSlot"></span>.</p>
+        <table class="tbl">
+          <thead><tr><th>Field</th><th>Enter</th></tr></thead>
+          <tbody>
+            <tr><td>Group agent</td><td>You, the Classic Reservation Agent. <b>Not the advisor.</b></td></tr>
+            <tr><td>Email</td><td>Your Classic email address. <b>Not the advisor's.</b></td></tr>
+            <tr><td>Group number</td><td>The primary/master Classic booking number. You don't need every related booking yet.</td></tr>
+            <tr><td>Group name</td><td>The standardized name.</td></tr>
+            <tr><td>Itinerary</td><td>Airline, flight numbers, dates, and schedule.</td></tr>
+          </tbody>
+        </table>
+        <div class="note"><p><b class="lead">Send yourself a copy.</b> If the submission doesn't reach Group Air, forward the copy as proof of the original request. Nobody has to rebuild it.</p></div>
+        <div class="note watch"><p><b class="lead">Timing.</b> Requests submitted after the airline Group Desks' cutoff may not be worked until the next business day.</p></div>
+      </div>
+    </details>
+
+    <details class="acc" id="sla" data-title="Response time: 24 business hours">
+      <summary><h3>Response time: 24 business hours</h3></summary>
+      <div class="body">
+        <p>You should hear from Group Air within <b>24 business hours</b> of submitting. The airline may take longer to return pricing or a contract, but Group Air should still update you inside that window.</p>
+        <div class="note watch"><p><b class="lead">Nothing yet?</b> Follow up the next business day. Don't wait two full business days.</p></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- STAGE 3 -->
+<section class="stage" id="stage-3" data-stage="3">
+  <div class="stage-side">
+    <div class="stage-num">3</div>
+    <h2>Proposal</h2>
+    <p>A price is not a promise. Read what's actually being held before the advisor sees it.</p>
+    <div class="owner">Owned by <span>You</span><span>Group Air</span></div>
+  </div>
+  <div>
+    <details class="acc" id="response" data-title="What Group Air sends back">
+      <summary><h3>What Group Air sends back</h3></summary>
+      <div class="body">
+        <p>Depending on the carrier and request, the response can include:</p>
+        <ul>
+          <li>Airline, flight schedule, and per-person group fare</li>
+          <li>Status of the requested space: held, or quote only</li>
+          <li>Contract acceptance deadline</li>
+          <li>Deposit amount and deposit deadline</li>
+          <li>Cancellation/reduction deadline</li>
+          <li>Name deadline and final-payment/ticketing deadline</li>
+          <li>Airline-specific restrictions</li>
+          <li>The TSA/passenger-name template, when applicable</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="acc" id="held-quote" data-title="Confirmed space vs. quote only">
+      <summary><h3>Confirmed space vs. quote only</h3></summary>
+      <div class="body">
+        <p>This is the distinction that protects the advisor's credibility with their client, and yours with the advisor.</p>
+        <div class="split">
+          <div>
+            <h5>Confirmed / space held</h5>
+            <p>The airline is holding the group space through the stated deadline, subject to the terms Group Air sent. Think of it like space held in a PNR.</p>
+          </div>
+          <div>
+            <h5>Quote only / no seats held</h5>
+            <p>Pricing without space. Nothing is secured, the fare isn't guaranteed, and availability can change. Group Air must recheck price and space when the advisor decides. It may be higher.</p>
+          </div>
+        </div>
+        <p>Watch for language like <span class="code">QUOTE ONLY</span>, <span class="code">NO SEATS BEING HELD</span>, or <span class="code">SUBJECT TO AVAILABILITY</span>.</p>
+        <div class="note watch"><p><b class="lead">Never assume.</b> Most domestic carriers typically hold space and some international carriers quote only, but that's a pattern, not a rule. Read the actual Group Air email every time.</p></div>
+        <div class="note say"><p><b class="lead">Say it like this (quote only).</b> "This is pricing only. The airline isn't holding seats yet, so when you're ready I'll have Group Air recheck availability, and the fare could move. If this schedule matters to your client, the sooner the better."</p></div>
+      </div>
+    </details>
+
+    <details class="acc" id="review" data-title="Review the proposal before you send it">
+      <summary><h3>Review the proposal before you send it</h3></summary>
+      <div class="body">
+        <h4>Verify the itinerary</h4>
+        <ul><li>Airline, flights, and dates are correct</li><li>Departure and arrival times match what was requested</li></ul>
+        <h4>Find every deadline</h4>
+        <ul><li>Contract acceptance</li><li>Deposit due date</li><li>Cancellation/reduction</li><li>Passenger names</li><li>Final payment/ticketing</li></ul>
+        <h4>Read the carrier-specific terms</h4>
+        <ul><li>Cancellation penalties and reduction allowance</li><li>Name-change and deviation rules</li><li>Seating restrictions and any special terms</li></ul>
+        <div class="note"><p><b class="lead">Unclear?</b> Ask Group Air before you interpret anything for the advisor.</p></div>
+      </div>
+    </details>
+
+    <details class="acc" id="present" data-title="Presenting Group Air to the advisor">
+      <summary><h3>Presenting Group Air to the advisor</h3></summary>
+      <div class="body">
+        <p>Send the complete proposal, not just the fare. The advisor needs to see:</p>
+        <ul>
+          <li>The flights offered and the per-person price</li>
+          <li>Whether space is actually held</li>
+          <li>When the group must accept</li>
+          <li>The deposit and its deadline</li>
+          <li>Reduction/cancellation terms</li>
+          <li>The name deadline and final-payment/ticketing deadline</li>
+          <li>Carrier rules that apply</li>
+        </ul>
+        <div class="note watch"><p><b class="lead">Don't summarize away the penalties.</b> The conditions that cost money are the ones the advisor most needs to see.</p></div>
+        <div class="note"><p><b class="lead">Several days went by?</b> Confirm with Group Air that the pricing and space are still valid before you promise them.</p></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- STAGE 4 -->
+<section class="stage" id="stage-4" data-stage="4">
+  <div class="stage-side">
+    <div class="stage-num">4</div>
+    <h2>Accept</h2>
+    <p>Build it before you announce it, so Group Air can finish their part the moment your email lands.</p>
+    <div class="owner">Owned by <span>You</span><span>Group Air</span></div>
+  </div>
+  <div>
+    <details class="acc" id="accept-steps" data-title="The advisor says yes: what to do, in order">
+      <summary><h3>The advisor says yes: what to do, in order</h3></summary>
+      <div class="body">
+        <h4>1. Prepare the Classic booking(s)</h4>
+        <p>Create any additional bookings. When there's more than one, establish one <b>Master Booking</b> and cross-reference every related booking to it.</p>
+        <h4>2. Build Customer Air in Plex</h4>
+        <p>Do this <b>before</b> you email Group Air, so the booking is ready for them when your acceptance arrives.</p>
+        <h4>3. Reply on the existing Group Air email</h4>
+        <p>Tell Group Air the advisor is accepting, the Customer Air is entered, and list every applicable Classic booking number. <b>Don't start a new email.</b></p>
+        <h4>4. Add the required deposit fee to the booking</h4>
+        <p>This is yours to add. Confirm timing with Group Air if you're unsure.</p>
+        <h4>5. Start tracking the contract deadlines</h4>
+        <p>From the dates in the Group Air terms, not from memory or another group.</p>
+      </div>
+    </details>
+
+    <details class="acc" id="customer-air" data-title="Customer Air in Plex">
+      <summary><h3>Customer Air in Plex</h3></summary>
+      <div class="body">
+        <p>Group Air lives in Plex as Customer Air (manual air). It's to flights what manually created, CAD-type inventory is to other components: entered by hand, not maintained as a live air booking.</p>
+        <div class="note watch"><p><b class="lead">That's why it won't update itself.</b> Airline schedule changes don't flow into Customer Air. You update it manually (see Schedule changes).</p></div>
+        <div class="split">
+          <div>
+            <h5>You enter</h5>
+            <p>Airline, flight number, departure and arrival points, date, departure and arrival times, adult/child quantities, and other required itinerary details. Match the Group Air itinerary exactly.</p>
+          </div>
+          <div>
+            <h5>Group Air completes</h5>
+            <p>Group Air pricing, supplier comments, customer comments, group name, airline group PNR, and number of seats held.</p>
+          </div>
+        </div>
+        <div class="note"><p><b class="lead">Hands off the Group Air comments.</b> Don't overwrite or edit the supplier/customer comments Flights entered unless they ask you to.</p></div>
+      </div>
+    </details>
+
+    <details class="acc" id="contract" data-title="The Classic Group Air contract">
+      <summary><h3>The Classic Group Air contract</h3></summary>
+      <div class="body">
+        <p>The official Classic Vacations Group Air contract normally arrives once the group is accepted and/or the deposit is secured. Group Air sends it to you.</p>
+        <p>Every airline's terms, cancellation rules, name-change rules, deviation rules, and penalties differ. Read it carefully before forwarding it to the advisor.</p>
+        <div class="note"><p><b class="lead">Advisor wants the contract before committing?</b> Ask Group Air. They can provide it in advance on request.</p></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- STAGE 5 -->
+<section class="stage" id="stage-5" data-stage="5">
+  <div class="stage-side">
+    <div class="stage-num">5</div>
+    <h2>Deposit &amp; deadlines</h2>
+    <p>Missed dates don't generate a warning. They release the seats.</p>
+    <div class="owner">Owned by <span>You</span><span>Advisor</span></div>
+  </div>
+  <div>
+    <details class="acc" id="deadlines" data-title="The five milestones and who tracks them">
+      <summary><h3>The five milestones and who tracks them</h3></summary>
+      <div class="body">
+        <ol class="milestones">
+          <li>Contract acceptance</li><li>Deposit</li><li>Reduction / cancellation</li><li>Passenger names</li><li>Final payment / ticketing</li>
+        </ol>
+        <p>Use the dates Group Air supplied for this group. Not industry averages, not a previous group, not the ranges in older training material.</p>
+        <div class="note watch"><p><b class="lead">You own the calendar.</b> Group Air makes every effort to remind you, especially about deposits. Treat that as a backup, never as your tracking system.</p></div>
+      </div>
+    </details>
+
+    <details class="acc" id="acceptance-deadline" data-title="Contract acceptance deadline">
+      <summary><h3>Contract acceptance deadline</h3></summary>
+      <div class="body">
+        <p>Some carriers allow only a few days to accept. Miss it, and the held space may cancel automatically.</p>
+        <p>If the advisor comes back later, Group Air has to return to the carrier, recheck availability, and possibly re-price. Don't promise the original fare or space.</p>
+      </div>
+    </details>
+
+    <details class="acc" id="deposit" data-title="Deposits and the deposit deadline">
+      <summary><h3>Deposits and the deposit deadline</h3></summary>
+      <div class="body">
+        <p>Deposit amounts and terms vary by carrier. A deposit may be refundable under specific conditions, non-refundable, applied to the final balance, or partially forfeited if space is reduced. Follow the exact terms Group Air provides.</p>
+        <div class="note"><p><b class="lead">Reminders come to you.</b> Group Air will generally remind you when the deposit is due. The reminder doesn't go to the advisor, so passing it on is on you.</p></div>
+        <div class="note watch"><p><b class="lead">Missed the deposit deadline?</b> The group space releases automatically. If the group still wants the air, contact Group Air for current availability and pricing.</p></div>
+        <div class="note say"><p><b class="lead">Say it like this.</b> "Your deposit is due on [date]. If it isn't in by then, the airline releases the seats and we'd be starting over at whatever the fare is that day."</p></div>
+      </div>
+    </details>
+
+    <details class="acc" id="reduce" data-title="Reducing or cancelling group space">
+      <summary><h3>Reducing or cancelling group space</h3></summary>
+      <div class="body">
+        <p>Some contracts include a window to reduce unused space without penalty. After that deadline, the carrier may:</p>
+        <ul>
+          <li>Keep some or all of the deposit</li>
+          <li>Charge a cancellation penalty</li>
+          <li>Limit the percentage of seats that can be reduced</li>
+          <li>Hold the group responsible for a minimum percentage of contracted space</li>
+        </ul>
+        <div class="note watch"><p><b class="lead">Never promise penalty-free.</b> Not until you've read the contract. If you're unsure, ask Group Air.</p></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- STAGE 6 -->
+<section class="stage" id="stage-6" data-stage="6">
+  <div class="stage-side">
+    <div class="stage-num">6</div>
+    <h2>Names &amp; seats</h2>
+    <p>The name list is where small assumptions become airport problems.</p>
+    <div class="owner">Owned by <span>You</span><span>Advisor</span><span>Group Air</span></div>
+  </div>
+  <div>
+    <details class="acc" id="name-list" data-title="The passenger name list">
+      <summary><h3>The passenger name list</h3></summary>
+      <div class="body">
+        <p>At the right stage, Group Air sends the carrier's name template. Templates differ by airline.</p>
+        <p>Every name must match the travel document the traveler will use, exactly: first, middle, last, and any other requested details.</p>
+        <div class="note watch"><p><b class="lead">A blank middle name isn't an answer.</b> If the list comes back without one, confirm with the advisor that the traveler truly has no middle name on their travel document. Then submit.</p></div>
+        <div class="note say"><p><b class="lead">Say it like this.</b> "I see no middle name for three travelers. Can you confirm their passports don't show one? It's much easier to fix today than at check-in."</p></div>
+        <p>Send the completed list on the existing Group Air thread.</p>
+      </div>
+    </details>
+
+    <details class="acc" id="seating" data-title="Seating and name-list order">
+      <summary><h3>Seating and name-list order</h3></summary>
+      <div class="body">
+        <p>Group Air may use the order of the list to decide who sits together. They don't know the relationships in the group unless the list shows them.</p>
+        <div class="namelist"><span class="grp">Smith, John</span><span class="grp">Smith, Mary</span><span class="grp">Smith, Emma</span>Jones, Robert<br>Jones, Linda</div>
+        <p>Put travelers who want to sit together next to each other. Once seats are assigned, rearranging them can be difficult.</p>
+        <div class="note"><p><b class="lead">Seats aren't guaranteed.</b> Airline operational or equipment changes can move them.</p></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- STAGE 7 -->
+<section class="stage" id="stage-7" data-stage="7">
+  <div class="stage-side">
+    <div class="stage-num">7</div>
+    <h2>Changes</h2>
+    <p>Name the change correctly and the carrier rule tells you the rest.</p>
+    <div class="owner">Owned by <span>You</span><span>Group Air</span></div>
+  </div>
+  <div>
+    <details class="acc" id="correction-change" data-title="Name correction vs. name change">
+      <summary><h3>Name correction vs. name change</h3></summary>
+      <div class="body">
+        <div class="split">
+          <div><h5>Name correction</h5><p>Same traveler, name needs fixing.</p><p class="code">Jon Smith → John Smith</p></div>
+          <div><h5>Name change / replacement</h5><p>Original traveler isn't going. Someone else takes the seat.</p><p class="code">John Smith → Robert Jones</p></div>
+        </div>
+        <p>Many carriers permit replacement under set conditions. Rules can include a free change, a fee, a maximum percentage of the group, a cutoff date, or restrictions close to departure.</p>
+        <div class="note watch"><p><b class="lead">Confirm before you promise.</b> Check the carrier's rule (Carrier rules tab), then route the request through the existing thread.</p></div>
+      </div>
+    </details>
+
+    <details class="acc" id="deviations" data-title="Deviations">
+      <summary><h3>Deviations</h3></summary>
+      <div class="body">
+        <p>A deviation is when a passenger doesn't fly the complete group itinerary.</p>
+        <div class="eg">
+          <div><span class="code">Core group</span>LAX → CUN, CUN → LAX</div>
+          <div><span class="code">Deviating passenger</span>LAX → CUN with the group, CUN → SFO on return</div>
+        </div>
+        <p>Depending on the carrier, deviations may be allowed on the return only, on either direction, for a percentage of passengers, with a minimum staying in the core group, with fare differences or a fee, or not at all.</p>
+        <div class="note watch"><p><b class="lead">Check the contract first.</b> Always verify the specific group contract before telling the advisor a deviation is possible.</p></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- STAGE 8 -->
+<section class="stage" id="stage-8" data-stage="8">
+  <div class="stage-side">
+    <div class="stage-num">8</div>
+    <h2>Service</h2>
+    <p>From contract to return flight: keep the record clean and the history in one place.</p>
+    <div class="owner">Owned by <span>You</span><span>Group Air</span></div>
+  </div>
+  <div>
+    <details class="acc" id="schedule" data-title="Schedule changes">
+      <summary><h3>Schedule changes</h3></summary>
+      <div class="body">
+        <p>Customer Air isn't live, so airline schedule changes won't appear in the Classic booking on their own. Group Air emails you the updated itinerary.</p>
+        <ol>
+          <li>Compare the old and new schedule.</li>
+          <li>Open the Customer Air in Plex.</li>
+          <li>Select <b>Update</b>.</li>
+          <li>Change the affected flight number and/or time.</li>
+          <li>Save the component.</li>
+          <li>Check the itinerary displays correctly.</li>
+          <li>Send updated statement/documentation as appropriate.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="acc" id="one-thread" data-title="One email thread, beginning to end">
+      <summary><h3>One email thread, beginning to end</h3></summary>
+      <div class="body">
+        <p>Mandatory. Every message about the group goes on the same Group Air thread: acceptance, deposit questions, payment confirmation, reductions, name lists, name changes, deviations, schedule changes, contract questions, and servicing issues.</p>
+        <p>Several Flights team members may work the Group Air inbox. One thread means whoever picks it up sees the whole history, and nobody asks the advisor for something twice.</p>
+      </div>
+    </details>
+
+    <details class="acc" id="escalation" data-title="Escalation">
+      <summary><h3>Escalation</h3></summary>
+      <div class="body">
+        <p>Contact Group Air instead of interpreting an airline contract on your own when:</p>
+        <ul><li>Contract language is unclear</li><li>An unusual servicing issue comes up</li><li>A request needs more support</li><li>Something needs escalating</li></ul>
+        <p>The Flights supervisor overseeing Group Air can step in when further escalation is needed.</p>
+      </div>
+    </details>
+  </div>
+</section>
+</div>
+
+<!-- ============================================================
+     TRAPS
+     ============================================================ -->
+<section class="traps band" id="traps">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <h2>Where groups go wrong</h2>
+        <p>Almost every expensive Group Air problem starts as one of these. None of them is hard to avoid.</p>
+      </div>
+    </div>
+    <div class="trap-list" id="trapList"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHECKLISTS
+     ============================================================ -->
+<section class="band" id="checklists">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <h2>Checklists</h2>
+        <p>Work a group from here. Checks clear when you reload, so each group starts fresh.</p>
+      </div>
+      <div class="check-head-actions"><button class="btn-quiet" type="button" id="clearChecks">Clear all checks</button></div>
+    </div>
+    <div class="checks" id="checks"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>The rule above every rule:</b> Group Air policies, pricing, deposits, deadlines, and change rules vary by carrier and change without notice. The terms Group Air provides for the specific reservation always take precedence over anything in this guide.</p>
+    <p>Classic Vacations Training &amp; Enablement · Group Air Policy &amp; Procedures · Updated September 2026</p>
+  </div>
+</footer>
+
+<!-- Search palette -->
+<div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Search the guide">
+  <div class="pal">
+    <div class="pal-top">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label class="sr" for="q">Search</label>
+      <input id="q" type="search" autocomplete="off" placeholder="What do you need? e.g. deposit missed, Delta deviation" role="combobox" aria-expanded="true" aria-controls="results">
+      <span class="kbd">esc</span>
+    </div>
+    <div class="pal-results" id="results" role="listbox"></div>
+    <div class="pal-foot"><span>↑ ↓ to move</span><span>Enter to open</span><span>Esc to close</span></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ============================================================
+   CONFIG — add live links here when ready.
+   Leave blank to show plain text instead of a link.
+   ============================================================ */
+const LINKS = {
+  requestForm: "https://app.smartsheet.com/b/form/99b409a65fcd4459bc6178490b31c681",   // Group Air Request Form (Smartsheet) URL
+};
+
+/* ============================================================
+   DATA
+   ============================================================ */
+const STAGES = ["Identify","Request","Proposal","Accept","Deposit","Names","Changes","Service"];
+
+const TASKS = [
+  {m:"Advisor on the line", q:"The group is 10 or more, or the bookings add up to 10+", a:"Treat it as Group Air. Count every related booking, not just this one. Then research flights with the advisor and submit the request form.", go:"count-party"},
+  {m:"Advisor on the line", q:"Travelers are coming from different cities", a:"If 10 or more share at least one common flight (like DFW → PUJ), it may qualify. Submit it to Group Air for evaluation.", go:"qualify"},
+  {m:"Advisor on the line", q:"\"Will Group Air be cheaper?\"", a:"Don't promise it. Group and FIT fares can be similar. The value is held space, a contract, and often the ability to replace a traveler.", go:"not-fit"},
+  {m:"Advisor on the line", q:"\"Do kids get a lower fare?\"", a:"Usually not. Most contracts price adults and children the same. Collect children's and infants' ages at time of travel anyway.", go:"passengers"},
+  {m:"Advisor on the line", q:"The advisor wants Frontier", a:"Frontier (F9) isn't supported for Group Air or FIT air through this process. Review other carriers with them.", go:"carriers-supported"},
+  {m:"Working the request", q:"What do I name the group?", a:"<span class='code'>LAST NAME + GROUP TYPE</span>, e.g. GOMEZ WEDDING. No type? LAST NAME + GROUP. No organizer yet? Advisor's last name.", go:"group-name"},
+  {m:"Working the request", q:"Who goes in Group Agent and Email?", a:"You, and your Classic email. Never the advisor's.", go:"submit"},
+  {m:"Working the request", q:"It's been a day and I haven't heard back", a:"Group Air should respond or update you within 24 business hours. Follow up the next business day.", go:"sla"},
+  {m:"Proposal in hand", q:"Are these seats actually held?", a:"Look for QUOTE ONLY, NO SEATS BEING HELD, or SUBJECT TO AVAILABILITY. If you see it, nothing is secured and the price can change.", go:"held-quote"},
+  {m:"Proposal in hand", q:"The advisor took several days to respond", a:"Confirm with Group Air that pricing and space are still valid before you promise anything.", go:"present"},
+  {m:"Proposal in hand", q:"The advisor wants the contract before committing", a:"Ask Group Air. They can send the Classic Group Air contract in advance.", go:"contract"},
+  {m:"Proposal in hand", q:"The advisor said yes. Now what?", a:"Create and cross-reference bookings to a Master, build Customer Air, then reply on the existing thread with every booking number. Add the deposit fee.", go:"accept-steps"},
+  {m:"Group is moving", q:"The deposit deadline is coming up", a:"You track it from the Group Air terms. Their reminder goes to you, not the advisor, so pass it on.", go:"deposit"},
+  {m:"Group is moving", q:"The deposit deadline was missed", a:"The space has released. If the group still wants the air, contact Group Air for current availability and pricing.", go:"deposit"},
+  {m:"Group is moving", q:"The name list has blank middle names", a:"Confirm with the advisor that those travelers truly have no middle name on their travel document before you submit.", go:"name-list"},
+  {m:"Group is moving", q:"A family wants to sit together", a:"List them next to each other on the name list. Group Air may seat by list order.", go:"seating"},
+  {m:"Something changed", q:"A name is misspelled vs. a new person is going", a:"Misspelling = name correction. Different person = name change. Check the carrier rule for each.", go:"correction-change"},
+  {m:"Something changed", q:"One traveler wants to return to a different city", a:"That's a deviation. Some carriers allow it, some don't. Check the carrier and the contract first.", go:"deviations"},
+  {m:"Something changed", q:"The group is getting smaller", a:"Read the reduction terms before you say anything. Never promise seats can be dropped penalty-free.", go:"reduce"},
+  {m:"Something changed", q:"The airline changed the schedule", a:"Customer Air won't update itself. Open it in Plex, select Update, change the flight/time, save, verify, and send updated docs.", go:"schedule"},
+  {m:"Something changed", q:"The contract language is unclear", a:"Ask Group Air rather than interpreting it. The Flights supervisor over Group Air handles escalations.", go:"escalation"}
+];
+
+const CARRIERS = [
+  {c:"AA", n:"American Airlines", q:"10+, all travel together outbound; cabins may combine",
+   dev:["part","Return only, before ticketing"], name:"1 free per ticket until 72 hrs out", dep:"~$100–$500 pp; refundable after ticketing less cancellations", ck:"Online, 24 hrs",
+   tags:["dev","online"],
+   d:[["Group","10 or more; all must travel together outbound; cabins may be combined."],["Deposit","Approximately $100–$500 per person depending on cabin/destination. Refundable after ticketing less applicable cancellations."],["Deviation","Return only, before ticketing. At least 10 passengers must remain with the core group."],["Name change","One free name change per ticket until 72 hours before departure. No passenger name changes within 72 hours."],["Seats","Flights agent assigns best available seats after deposit and contract requirements are completed."],["Check-in","Online check-in available 24 hours before departure."]]},
+  {c:"AC", n:"Air Canada", q:"10+ traveling together outbound",
+   dev:["part","Return only, up to 25%"], name:"$100 fee, up to 50%, until 3 days out", dep:"$100 per seat, non-refundable (+$100 booking fee)", ck:"Online",
+   tags:["dev","online","nonref"],
+   d:[["Group","10 or more traveling together outbound."],["Booking fee","$100 non-refundable booking fee required to confirm space; applied to full payment."],["Deposit","$100 per seat, non-refundable."],["Deviation","Return only; up to 25% of the group; must be changed before the final-payment date."],["Name change","$100 service fee; up to 50% of the group; until three days before departure."],["Seats","Seat block established at booking."],["Check-in","Online check-in available."]]},
+  {c:"TN", n:"Air Tahiti Nui", q:"10+, same outbound and return, same cabin",
+   dev:["yes","Before ticketing, $150 + fare difference"], name:"$150 change / $50 correction, until 48 hrs out", dep:"$200 pp, non-refundable", ck:"Airport counter only",
+   tags:["dev","airport","nonref"],
+   d:[["Group","10 or more; entire group travels on the same outbound and return itinerary and in the same cabin."],["Deposit","$200 per person, non-refundable."],["Deviation","Allowed before ticketing; $150 deviation fee plus applicable fare difference."],["Name change","$150 per passenger. Name correction: $50 per passenger. Available until 48 hours before departure."],["Seats","Assigned when names are received."],["Check-in","Airport counter only."]]},
+  {c:"AS", n:"Alaska Airlines", q:"10+ together outbound; cabins may combine",
+   dev:["part","Return only, before ticketing"], name:"1 free until 5 days out, then $125", dep:"~$100 pp; refundable after ticketing less cancelled seats", ck:"Online, 24 hrs",
+   tags:["dev","online"],
+   d:[["Group","10 or more traveling together outbound; combined cabins permitted."],["Deposit","Approximately $100 per person depending on destination/travel date. Refundable after ticketing less cancelled seats."],["Deviation","Return only, before ticketing; at least 10 passengers must remain with the core group. Fare difference applies; no residual value."],["Name change","One free change per ticket until five days before travel; afterward, $125 per ticket."],["Seats","Airline blocks seats once deposit is paid."],["Check-in","Online check-in 24 hours before departure."]]},
+  {c:"DL", n:"Delta / Air France / KLM", q:"10+ with at least one common flight; cabins may combine",
+   dev:["yes","Up to 20%, outbound or return, before ticketing"], name:"1 free for up to 50% until 48 hrs out", dep:"~$100–$450 pp", ck:"Online",
+   tags:["dev","online"],
+   d:[["Group","10 or more with at least one common flight; combined cabins permitted."],["Booking window","Group bookings available for travel within 240 days."],["Deposit","Approximately $100–$450 per person depending on destination, cabin, and travel date."],["Deviation","Up to 20% of the group may deviate outbound or return before ticketing. Deviations within 90 days of departure may incur a $100-per-seat fee."],["Name change","One free name change per ticket for up to 50% of the group until 48 hours before departure. Additional/late changes may incur a $150 fee."],["Seats","Delta blocks seats after deposit; exact seat known after the passenger name is provided. Air France/KLM seats generally assigned eight days before departure; earlier selection may require purchase."],["Check-in","Online check-in available; group-leader check-in may be preferred."],["Watch","Group tickets cannot be upgraded using miles."]]},
+  {c:"LH", n:"Lufthansa / Austrian", q:"10+ on the exact same itinerary; cabins may combine",
+   dev:["no","No deviations or itinerary changes"], name:"1 free for up to 50% until 72 hrs out", dep:"~$100–$500 pp; penalty may apply after acceptance", ck:"Airport counter only",
+   tags:["nodev","airport","nocredit"],
+   d:[["Group","10 or more traveling the exact same itinerary; combined cabins permitted."],["Deposit","Approximately $100–$500 per person depending on destination/travel date."],["Cancellation","Penalty may apply after accepting the group contract. No travel credit."],["Deviation","No deviations or itinerary changes."],["Name change","One free name change for up to 50% of the group until 72 hours before departure. Additional/late changes may cost $100 per ticket."],["Seats","Blocked at ticketing."],["Check-in","Airport counter only."]]},
+  {c:"B6", n:"JetBlue", q:"10+, exact same outbound and return",
+   dev:["part","Up to 10% after ticketing, $135 + fare difference"], name:"$100 + tax increases, 4+ days out", dep:"$50 pp, applied to final payment less cancellations", ck:"Airport counter only",
+   tags:["dev","airport","nocredit"],
+   d:[["Group","10 or more; entire group travels on the exact outbound and return itinerary."],["Baggage","Current training aide: two checked bags and one personal item; no carry-on."],["Deposit","$50 per person applied toward final payment less cancellations."],["Deviation","Up to 10% after ticketing; minimum 10 passengers must remain in the core group. $135 change fee plus fare difference."],["Name change","$100 plus applicable tax increases; request at least four days before departure."],["Seats","Assigned after deposit; seat changes not permitted."],["Check-in","Airport counter only."],["Frequent flyer","Mileage may be claimed with JetBlue after completed travel."],["Cancellation","No travel credit."]]},
+  {c:"WN", n:"Southwest", q:"10+ together on the same itinerary",
+   dev:["no","Not permitted"], name:"Allowed until 4 days out", dep:"~15–25% of total group fare", ck:"Group boarding positions from 24 hrs",
+   tags:["nodev","nocredit"],
+   d:[["Group","10 or more traveling together on the same itinerary."],["Deposit","Approximately 15–25% of total group fare depending on destination/season."],["Deviation","Not permitted."],["Name change","Allowed until four days before departure."],["Reduction","Maximum reduction allowance is 10% of total booked group space under the current training reference. Additional financial consequences may apply after deposit."],["Check-in","Boarding positions may be reserved through the Southwest Group process beginning 24 hours before departure. International passengers may need to reserve positions individually and get boarding passes at the ticket counter."],["Cancellation","No travel credit; use-it-or-lose-it."]]},
+  {c:"UA", n:"United Airlines", q:"10+ with at least one common flight; cabins may combine",
+   dev:["yes","Up to 10%, either direction, before or after ticketing"], name:"1 free until 8 days out; $100 within 7 days", dep:"~$100–$500 pp; $300–$600 cancellation penalty after acceptance", ck:"Online, 24 hrs",
+   tags:["dev","online"],
+   d:[["Group","10 or more with at least one common flight; combined cabins permitted."],["Deposit","Approximately $100–$500 per person depending on cabin, destination, and travel date."],["Cancellation","United may impose a $300–$600 penalty for cancellation after contract acceptance."],["Deviation","Up to 10% may deviate before or after ticketing, outbound or return. Deviating passengers must keep at least one common flight with the core group. Lower-fare differences are forfeited."],["Name change","One free name change per ticket until eight days before departure. Changes seven days or less before departure may cost $100."],["Seats","Airline blocks seats when the group is booked."],["Check-in","Online check-in 24 hours before departure."]]},
+  {c:"WS", n:"WestJet", q:"10+ on at least one common flight",
+   dev:["no","Not permitted; no additions"], name:"Until 72 hrs out; $100 + tax within 72; none within 24", dep:"$100 pp, non-refundable (holding fee may apply)", ck:"Online, 24 hrs",
+   tags:["nodev","online","nonref"],
+   d:[["Group","10 or more traveling together on at least one common flight."],["Holding fee","A holding fee may be required to secure space."],["Deposit","$100 per person at confirmation; non-refundable."],["Deviation","Not permitted. Additions are not permitted under the current reference."],["Name change","Allowed until 72 hours before departure. Within 72 hours, $100 plus tax may apply. No name changes within 24 hours."],["Seats","Generally blocked toward the rear of the cabin after ticketing."],["Check-in","Online check-in available 24 hours prior."]]}
+];
+const CARRIER_FILTERS = [
+  {k:"dev", l:"Allows some deviation"},
+  {k:"nodev", l:"No deviations"},
+  {k:"airport", l:"Airport check-in only"},
+  {k:"nonref", l:"Non-refundable deposit"},
+  {k:"nocredit", l:"No travel credit"}
+];
+
+const LANES = [
+  {k:"ra", t:"You", sub:"Reservation Agent. The advisor's point of contact, start to finish.", items:[
+    "Recognize when the count may require Group Air","Count the total traveling party","Research flight options","Review itinerary options with the advisor","Confirm which flights the advisor wants quoted","Gather all required group information","Submit the Group Air Request Form","Review the Group Air response","Confirm held space vs. quote only","Verify the itinerary matches the request","Review every deadline and condition","Send the complete proposal to the advisor","Get the advisor's decision","Create and cross-reference Classic bookings","Build Customer Air in Plex","Tell Group Air the advisor is proceeding (same thread)","Add the required deposit fee to the booking","Track contractual deadlines","Collect and verify passenger information","Return the completed name list to Group Air","Update Customer Air after a schedule change","Send updated documentation"]},
+  {k:"ga", t:"Group Air", sub:"Flights. Works the airline side.", items:[
+    "Receive the submitted request","Contact the airline Group Department","Obtain group pricing and terms","Hold space when the carrier permits","State whether space is held or quote only","Provide contractual deadlines","Manage the airline group PNR","Enter Group Air pricing in the Classic booking","Add supplier and customer comments","Add group name, airline PNR, and seat count","Provide the airline's name-list template","Manage the airline-side process","Email you about schedule changes","Provide the official Classic Group Air contract","Remind you when the deposit deadline nears"]},
+  {k:"ta", t:"Travel Advisor", sub:"Makes the decisions. Works through you.", items:[
+    "Provide the group requirements","Select the itinerary to quote","Review the proposal and contract terms","Decide whether the group proceeds","Pay by the required deadlines","Provide complete passenger information","Review and accept airline terms","Request changes through you"]}
+];
+const CHANNELS = [
+  {w:"Starting a new group", t:"Group Air Request Form", p:"The approved Smartsheet form. Request a copy of your submission."},
+  {w:"Everything after that", t:"The existing Group Air thread", p:"Acceptance, deposits, names, changes, schedule updates. Never a new email."},
+  {w:"Contract unclear or unusual issue", t:"Group Air", p:"Ask before you interpret anything for the advisor."},
+  {w:"Needs escalation", t:"Flights supervisor", p:"The supervisor overseeing Group Air steps in when needed."}
+];
+
+const POLICIES = [
+  {s:1,t:"10+ with a shared itinerary or common flight is Group Air",r:"Once the total traveling party reaches 10 with a common itinerary or shared flight, submit it to Group Air for evaluation.",w:"The requirement comes from the airline, not Classic.",go:"qualify"},
+  {s:1,t:"Count the whole party, never one booking",r:"Add every related Classic booking together, including new ones joining later.",w:"Three bookings of four are a group of twelve.",go:"count-party"},
+  {s:1,t:"Never split a group into FIT bookings",r:"Don't divide a larger group into smaller FIT bookings to avoid Group Air.",w:"You'd be working around the airline's rule, not ours.",go:"count-party"},
+  {s:1,t:"Never promise a cheaper fare",r:"Group Air is a different booking structure, not a guaranteed discount. Child fares are usually the same as adult.",w:"Group and FIT pricing can be similar.",go:"not-fit"},
+  {s:1,t:"Group Air tickets are non-refundable",r:"Treat all Group Air tickets as non-refundable. Cancellation penalties vary by carrier.",w:"Current general training guidance.",go:"not-fit"},
+  {s:2,t:"Research before you request",r:"Research flights, review them with the advisor, and submit only the itinerary they choose.",w:"Group Air quotes what you send. Vague requests cost a round trip.",go:"research"},
+  {s:2,t:"You are the Group Agent",r:"Group Agent and Email on the form are yours: your name and Classic email, never the advisor's.",w:"Group Air works with you, not the advisor directly.",go:"submit"},
+  {s:2,t:"Use the group name standard",r:"LAST NAME + GROUP TYPE (e.g. GOMEZ WEDDING). No type: LAST NAME + GROUP.",w:"Group Air needs a name for the quote or contract, and consistent names are findable.",go:"group-name"},
+  {s:2,t:"24 business hours, then follow up",r:"Expect a response or status within 24 business hours. Follow up the next business day.",w:"Don't let a group sit two days waiting.",go:"sla"},
+  {s:3,t:"A quote is not held space",r:"Read every response for QUOTE ONLY, NO SEATS BEING HELD, or SUBJECT TO AVAILABILITY.",w:"Quote-only fares and space can change before the advisor decides.",go:"held-quote"},
+  {s:3,t:"Send the full proposal",r:"Give the advisor every deadline and condition, not just the fare.",w:"The terms that cost money are the ones that matter most.",go:"present"},
+  {s:3,t:"Stale proposal? Reconfirm",r:"If several days pass before the advisor responds, confirm price and space with Group Air before promising them.",w:"Held space and quotes both expire.",go:"present"},
+  {s:4,t:"Customer Air before the acceptance email",r:"Build Customer Air in Plex first, then reply on the thread with every booking number.",w:"Group Air can complete their part the moment your email lands.",go:"accept-steps"},
+  {s:4,t:"One Master Booking",r:"When there are multiple bookings, cross-reference all of them to one Master Booking.",w:"Everyone servicing the group sees the full picture.",go:"accept-steps"},
+  {s:4,t:"Don't edit Group Air's comments",r:"Leave the supplier/customer comments in Customer Air alone unless Flights asks.",w:"Flights maintains them.",go:"customer-air"},
+  {s:5,t:"You own the deadlines",r:"Track every date from the Group Air terms for this group. Their reminders are a backup.",w:"The deposit reminder goes to you, not the advisor.",go:"deadlines"},
+  {s:5,t:"A missed deposit releases the space",r:"If the deposit isn't secured by the airline's deadline, the seats release automatically.",w:"Starting over means current availability and current price.",go:"deposit"},
+  {s:5,t:"Never promise penalty-free reductions",r:"Read the contract before saying seats can be dropped.",w:"Carriers may keep deposits or hold the group to a minimum.",go:"reduce"},
+  {s:6,t:"Names match the travel document",r:"Every name exactly as it appears on the document the traveler will use. Confirm any blank middle name.",w:"Blank isn't the same as none.",go:"name-list"},
+  {s:6,t:"List families together",r:"Put travelers who want to sit together next to each other on the name list.",w:"Group Air may seat by list order.",go:"seating"},
+  {s:7,t:"Correction and change are different",r:"Correction: same person, fixed name. Change: a different person. Confirm the carrier rule before promising either.",w:"Rules, fees, and cutoffs differ.",go:"correction-change"},
+  {s:7,t:"Verify before allowing a deviation",r:"Check the specific group contract before telling the advisor a deviation is possible.",w:"Some carriers don't allow them at all.",go:"deviations"},
+  {s:8,t:"Customer Air doesn't update itself",r:"When Group Air emails a schedule change, update Customer Air in Plex manually and send updated docs.",w:"It's not a live air component.",go:"schedule"},
+  {s:8,t:"One thread, start to finish",r:"Every Group Air communication for the group stays on the original email thread.",w:"Multiple Flights team members may service it.",go:"one-thread"},
+  {s:8,t:"Ask, don't interpret",r:"Unclear contract language or unusual issues go to Group Air. Escalations go to the Flights supervisor.",w:"A wrong interpretation becomes the advisor's penalty.",go:"escalation"},
+  {s:0,t:"Group Air terms always win",r:"The terms provided for the specific reservation take precedence over any general reference, including this guide.",w:"Carrier rules change without notice.",go:"carriers-supported"}
+];
+
+const TRAPS = [
+  ["Treating related bookings as separate FIT groups","Look at the total traveling party.","count-party"],
+  ["Splitting a group into smaller bookings","The group requirement comes from the airline.","count-party"],
+  ["Submitting before researching flights","Settle the itinerary with the advisor first.","research"],
+  ["Entering the advisor as Group Agent, or their email","Both fields are yours.","submit"],
+  ["Assuming Group Air will be cheaper","It's a different structure, not a discount.","not-fit"],
+  ["Assuming a quote means seats are held","Read for confirmed vs. quote-only language.","held-quote"],
+  ["Ignoring the acceptance deadline","Held space can cancel automatically.","acceptance-deadline"],
+  ["Relying on Group Air's deposit reminder","Track it from the original terms.","deadlines"],
+  ["Missing the deposit deadline","The space releases automatically.","deposit"],
+  ["Using rules from another group","Carrier terms change. Use this group's terms.","carriers-supported"],
+  ["Starting new email threads","Keep one continuous thread.","one-thread"],
+  ["Editing Group Air comments in Customer Air","Flights maintains those.","customer-air"],
+  ["Reading a blank middle name as \"none\"","Verify against the travel document.","name-list"],
+  ["Entering families randomly on the name list","Keep seat-together travelers adjacent.","seating"],
+  ["Expecting Customer Air to update itself","Update schedule changes manually in Plex.","schedule"]
+];
+
+const CHECKS = [
+  {t:"Before submitting", i:["Confirm the total traveling party","10+ share the itinerary or a common flight","Research flight options","Review options with the advisor","Confirm requested airline and flights","Adult / child / infant counts and ages","Lap infant vs. infant in a seat","Set the group name","Confirm the main booking number","Complete the request form","Request a copy of the submission"]},
+  {t:"When the proposal arrives", i:["Verify the itinerary","Verify the per-person fare","Held space or quote only?","Note the acceptance deadline","Note deposit amount and date","Note reduction/cancellation date","Note the name deadline","Note final payment/ticketing date","Review carrier-specific terms","Send the full proposal to the advisor"]},
+  {t:"When the advisor accepts", i:["Create any additional bookings","Set up and cross-reference the Master Booking","Build Customer Air","Reply on the existing thread","Include all booking numbers","Add the deposit fee","Confirm Group Air completes its portion","Address contract and deposit requirements"]},
+  {t:"Before ticketing", i:["Monitor deadlines","Get the passenger-name template","Verify every name against the travel document","Confirm any missing middle names","Seat-together travelers listed next to each other","Send the list on the existing thread","Complete payment requirements"]},
+  {t:"After ticketing, before travel", i:["Monitor Group Air email","Route name changes and deviations through Group Air","Update Customer Air for schedule changes","Send updated documentation","Keep everything on the original thread"]}
+];
+
+const PATHS = {
+  qualify:{t:"Does this need Group Air?", s:"Count, common flight, carrier", start:"n1", nodes:{
+    n1:{q:"How many travelers are in the full traveling party?", h:"Include every related Classic booking, even ones already made.", o:[["10 or more","n2"],["Fewer than 10","eFIT"],["Not sure yet","eCount"]]},
+    n2:{q:"Do they share the same itinerary, or at least one common flight?", o:[["Same itinerary","n3"],["At least one shared flight","n3"],["No flight in common","eNone"]]},
+    n3:{q:"Which carrier does the advisor want?", o:[["Frontier (F9)","eF9"],["Another carrier, or not decided","eGA"]]},
+    eGA:{v:"good",r:"This is Group Air.",p:"Research flights, confirm the exact itinerary with the advisor, then submit the Group Air Request Form. Expect a response or status within 24 business hours.",say:"\"With a group this size on a shared flight, the airline treats it as a group booking. Let's pick the exact flights and I'll get you real group terms.\"",go:"research"},
+    eFIT:{v:"info",r:"FIT air, for now.",p:"Keep an eye on the total. If more travelers join on another booking, recount the whole party.",go:"count-party"},
+    eCount:{v:"warn",r:"Count before anything else.",p:"Add every related booking together. Four plus four plus four is a group of twelve, even though no booking holds ten.",go:"count-party"},
+    eNone:{v:"info",r:"Not a Group Air scenario on its own.",p:"Group Air depends on a common itinerary or shared flight. If you're not sure whether segments overlap, ask Group Air to evaluate.",go:"qualify"},
+    eF9:{v:"warn",r:"Frontier isn't supported.",p:"Frontier (F9) isn't supported for Group Air or FIT air through this process. Review other carriers with the advisor.",go:"carriers-supported"}
+  }},
+  proposal:{t:"The proposal just arrived", s:"Held or quote only, and what's next", start:"n1", nodes:{
+    n1:{q:"Does the response say QUOTE ONLY, NO SEATS BEING HELD, or SUBJECT TO AVAILABILITY?", o:[["Yes","nQ"],["No, space is confirmed / held","nH"],["I can't tell","eAsk"]]},
+    nH:{q:"Does the itinerary match exactly what you requested?", h:"Airline, flights, dates, and departure/arrival times.", o:[["Yes, it matches","nH2"],["No, something's different","eMismatch"]]},
+    nH2:{q:"Is the advisor ready to decide?", o:[["Ready now","eGo"],["They need time","eWait"]]},
+    nQ:{q:"Is the advisor ready to proceed?", o:[["Ready to proceed","eQGo"],["Still deciding","eQWait"]]},
+    eAsk:{v:"warn",r:"Ask Group Air before you send it.",p:"Reply on the same thread and ask whether space is held. Don't interpret it for the advisor.",go:"held-quote"},
+    eMismatch:{v:"warn",r:"Fix it before the advisor sees it.",p:"Reply on the existing Group Air thread with what doesn't match and get it corrected first.",go:"review"},
+    eGo:{v:"good",r:"Send the full proposal, then follow the acceptance steps.",p:"Include every deadline and condition. When the advisor says yes: bookings, Customer Air, then reply on the thread.",go:"accept-steps"},
+    eWait:{v:"info",r:"Lead with the acceptance deadline.",p:"Send the complete proposal and put the acceptance deadline up front. If several days pass, reconfirm price and space with Group Air before promising anything.",say:"\"The airline is holding this space until [date]. After that it may cancel automatically, and we'd have to re-quote.\"",go:"acceptance-deadline"},
+    eQGo:{v:"warn",r:"Tell Group Air on the thread. Expect a recheck.",p:"Nothing was held. Group Air rechecks availability and pricing now, and the fare may be higher than the quote.",say:"\"Great. Because this was pricing only, Group Air will recheck space and fare now. I'll confirm the moment I hear back.\"",go:"held-quote"},
+    eQWait:{v:"info",r:"Set the expectation now.",p:"Nothing is secured, and both space and price can move while they decide.",say:"\"This is pricing only. The airline isn't holding seats yet, so when you're ready I'll have it rechecked, and the fare could change.\"",go:"held-quote"}
+  }},
+  change:{t:"The advisor wants a change", s:"Names, deviations, count changes", start:"n1", nodes:{
+    n1:{q:"What's changing?", o:[["Spelling of a name, same person","eCorr"],["A different person takes the seat","eChg"],["Someone won't fly the full group itinerary","eDev"],["Fewer travelers","eRed"],["More travelers","eAdd"],["The airline changed the schedule","eSch"]]},
+    eCorr:{v:"info",r:"Name correction.",p:"Same traveler, fixed name. Check the carrier rule (some charge, e.g. Air Tahiti Nui $50), then send it on the existing thread.",go:"correction-change"},
+    eChg:{v:"info",r:"Name change (passenger replacement).",p:"Many carriers allow it within limits: a free change, a fee, a maximum percentage of the group, or a cutoff date. Confirm the carrier rule before promising it.",say:"\"Good news, group contracts often allow a replacement. Let me confirm this airline's rule and cutoff before we count on it.\"",go:"correction-change"},
+    eDev:{v:"warn",r:"That's a deviation.",p:"Some carriers allow return-only deviations, some allow a percentage, some prohibit them entirely. Check the carrier and the specific contract before you answer.",go:"deviations"},
+    eRed:{v:"warn",r:"Read the reduction terms first.",p:"Penalty-free reduction only exists inside the contract's window, if at all. After it, deposits may be kept or minimums enforced. Never promise penalty-free.",go:"reduce"},
+    eAdd:{v:"info",r:"Send it to Group Air on the thread.",p:"Additions depend on the carrier and current availability. WestJet doesn't permit additions under the current reference.",go:"one-thread"},
+    eSch:{v:"info",r:"Update Customer Air manually.",p:"Group Air emails you the new schedule. Open Customer Air in Plex, select Update, change the flight/time, save, verify, and send updated documentation.",go:"schedule"}
+  }}
+};
+
+/* ============================================================
+   Helpers
+   ============================================================ */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const chev = '<svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
+const linkIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>';
+
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),1800)}
+function goBtn(id,label){return `<button class="golink" type="button" data-go="${id}">${label||"Open the full procedure"}</button>`}
+
+/* ============================================================
+   Route
+   ============================================================ */
+const route = $("#route");
+STAGES.forEach((s,i)=>{
+  const li=document.createElement("li");
+  li.innerHTML=`<a href="#stage-${i+1}" data-go="stage-${i+1}"><span class="dot"></span><span class="lbl"><b>${i+1}</b>${s}</span></a>`;
+  route.appendChild(li);
+});
+
+/* ============================================================
+   Tabs
+   ============================================================ */
+const tabs = $$(".tab");
+function selectTab(key, focus){
+  tabs.forEach(t=>{
+    const on = t.id==="tab-"+key;
+    t.setAttribute("aria-selected", on); t.tabIndex = on?0:-1;
+    $("#"+t.getAttribute("aria-controls")).hidden = !on;
+    if(on && focus) t.focus();
+  });
+}
+tabs.forEach((t,i)=>{
+  t.addEventListener("click",()=>selectTab(t.id.slice(4)));
+  t.addEventListener("keydown",e=>{
+    if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;
+    const n=tabs[(i+(e.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length];
+    selectTab(n.id.slice(4),true);
+  });
+});
+$$("[data-tab-go]").forEach(b=>b.addEventListener("click",()=>{selectTab(b.dataset.tabGo);$("#tools").scrollIntoView({behavior:"smooth"})}));
+
+/* ============================================================
+   Task finder
+   ============================================================ */
+(function(){
+  const groups={};TASKS.forEach((t,i)=>{(groups[t.m]=groups[t.m]||[]).push([t,i])});
+  $("#moments").innerHTML=Object.keys(groups).map(m=>`<div class="moment"><h3>${m}</h3>${groups[m].map(([t,i])=>`
+    <details class="task" id="task-${i}" data-idx data-title="${esc(t.q)}" data-where="Find a task · ${esc(m)}" data-tab="tasks">
+      <summary>${chev}<span>${t.q}</span></summary>
+      <div class="task-a"><p>${t.a}</p>${goBtn(t.go)}</div>
+    </details>`).join("")}</div>`).join("");
+})();
+
+/* ============================================================
+   Decision paths
+   ============================================================ */
+let pathKey="qualify", trail=[];
+function renderPick(){
+  $("#pathPick").innerHTML=Object.entries(PATHS).map(([k,p])=>`<button type="button" aria-pressed="${k===pathKey}" data-path="${k}"><b>${p.t}</b><span>${p.s}</span></button>`).join("");
+  $$("#pathPick button").forEach(b=>b.addEventListener("click",()=>{pathKey=b.dataset.path;trail=[];renderPick();renderNode(PATHS[pathKey].start)}));
+}
+function renderNode(id){
+  const P=PATHS[pathKey], n=P.nodes[id], card=$("#pathCard");
+  const tr = trail.length?`<div class="trail">${trail.map((s,i)=>`<button type="button" data-back="${i}" title="Change this answer">${esc(s.a)}</button>`).join("")}</div>`:`<div class="trail"></div>`;
+  if(n.q){
+    card.innerHTML = tr + `<p class="q">${n.q}</p>${n.h?`<p class="q-help">${n.h}</p>`:`<div style="height:12px"></div>`}<div class="opts">${n.o.map(([l,to])=>`<button class="opt" type="button" data-to="${to}">${esc(l)}</button>`).join("")}</div>`;
+    $$(".opt",card).forEach(b=>b.addEventListener("click",()=>{trail.push({node:id,a:b.textContent});renderNode(b.dataset.to)}));
+  } else {
+    card.innerHTML = tr + `<div class="verdict ${n.v}"><h4>${n.r}</h4><p>${n.p}</p>${n.say?`<p class="say"><b>Say it like this.</b> ${n.say}</p>`:""}</div>
+      <div class="card-actions">${goBtn(n.go)}${pathKey==="change"||n.go==="carriers-supported"?`<button class="golink" type="button" data-tab-jump="carriers">Check carrier rules</button>`:""}<button class="btn-quiet" type="button" data-restart>Start over</button></div>`;
+    $("[data-restart]",card).addEventListener("click",()=>{trail=[];renderNode(P.start)});
+    const cj=$("[data-tab-jump]",card); if(cj) cj.addEventListener("click",()=>selectTab("carriers"));
+  }
+  $$("[data-back]",card).forEach(b=>b.addEventListener("click",()=>{const i=+b.dataset.back;const node=trail[i].node;trail=trail.slice(0,i);renderNode(node)}));
+}
+renderPick(); renderNode(PATHS[pathKey].start);
+
+/* ============================================================
+   Carrier board
+   ============================================================ */
+const activeFilters=new Set(), picked=[];
+$("#carrierFilters").innerHTML=CARRIER_FILTERS.map(f=>`<button class="chip" type="button" aria-pressed="false" data-f="${f.k}">${f.l}</button>`).join("");
+$("#board tbody").innerHTML=CARRIERS.map((c,i)=>`
+  <tr data-i="${i}" id="carrier-${c.c.toLowerCase()}" data-idx data-title="${esc(c.n)} group rules" data-where="Carrier rules" data-tab="carriers">
+    <td><label class="cx"><input type="checkbox" aria-label="Compare ${esc(c.n)}"><span class="code">${c.c}</span><b>${c.n}</b></label></td>
+    <td>${c.q}</td><td class="${c.dev[0]}">${c.dev[1]}</td><td>${c.name}</td><td>${c.dep}</td><td>${c.ck}</td>
+    <td hidden>${c.d.map(x=>x.join(": ")).join(" ")}</td>
+  </tr>`).join("");
+function applyFilters(){
+  $$("#board tbody tr").forEach(tr=>{const c=CARRIERS[tr.dataset.i];const ok=[...activeFilters].every(f=>c.tags.includes(f));tr.classList.toggle("hide",!ok)});
+}
+$$("#carrierFilters .chip").forEach(b=>b.addEventListener("click",()=>{
+  const on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",on);on?activeFilters.add(b.dataset.f):activeFilters.delete(b.dataset.f);applyFilters();
+}));
+function renderCompare(){
+  const el=$("#compare");
+  $$("#board tbody tr").forEach(tr=>{const on=picked.includes(+tr.dataset.i);tr.classList.toggle("sel",on);$("input",tr).checked=on});
+  if(!picked.length){el.innerHTML=`<p class="compare-empty">Tick a carrier, or click its row, to see the full rules. Pick up to three to compare.</p>`;return}
+  el.innerHTML=`<div class="compare-grid" style="grid-template-columns:repeat(${picked.length},minmax(240px,1fr))">${picked.map(i=>{const c=CARRIERS[i];return `
+    <article class="ccard"><header><h4>${c.n}</h4><button type="button" data-rm="${i}" aria-label="Remove ${esc(c.n)}">Remove</button></header>
+    <dl>${c.d.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl></article>`}).join("")}</div>`;
+  el.firstElementChild.parentElement.style.overflowX="auto";
+  $$("[data-rm]",el).forEach(b=>b.addEventListener("click",()=>{picked.splice(picked.indexOf(+b.dataset.rm),1);renderCompare()}));
+}
+function togglePick(i){
+  const at=picked.indexOf(i);
+  if(at>-1)picked.splice(at,1);
+  else{if(picked.length>=3){picked.shift();toast("Comparing up to three. Swapped out the oldest.")}picked.push(i)}
+  renderCompare();
+}
+$$("#board tbody tr").forEach(tr=>{
+  tr.addEventListener("click",e=>{if(e.target.tagName==="INPUT")return;e.preventDefault();togglePick(+tr.dataset.i)});
+  $("input",tr).addEventListener("change",()=>togglePick(+tr.dataset.i));
+});
+renderCompare();
+
+/* ============================================================
+   Routing lanes + channels
+   ============================================================ */
+$("#lanes").innerHTML=LANES.map(l=>`<div class="lane ${l.k}"><h3>${l.t}</h3><p class="sub">${l.sub}</p><ul>${l.items.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+$("#channels").innerHTML=CHANNELS.map(c=>`<div class="channel"><div class="when">${c.w}</div><b>${c.t}</b><p>${c.p}</p></div>`).join("");
+$("#ownerFind").addEventListener("input",e=>{
+  const terms=e.target.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+  $$("#lanes li").forEach(li=>{
+    const t=li.textContent.toLowerCase();const hit=terms.length&&terms.every(w=>t.includes(w));
+    li.classList.toggle("dim",terms.length>0&&!hit);li.classList.toggle("hit",!!hit);
+  });
+});
+
+/* ============================================================
+   Policy library
+   ============================================================ */
+const polStages=[["all","All"],...STAGES.map((s,i)=>[String(i+1),`${i+1} ${s}`]),["0","Overall"]];
+$("#polFilters").innerHTML=polStages.map(([k,l],i)=>`<button class="chip" type="button" aria-pressed="${i===0}" data-s="${k}">${l}</button>`).join("");
+$("#policies").innerHTML=POLICIES.map((p,i)=>`
+  <div class="policy" id="policy-${i}" data-s="${p.s}" data-idx data-title="${esc(p.t)}" data-where="Policy library" data-tab="policies">
+    <div class="stage-tag">${p.s?`Stage ${p.s}: ${STAGES[p.s-1]}`:"Applies everywhere"}</div>
+    <h4>${p.t}</h4><p>${p.r}</p><p class="why">Why: ${p.w}</p>${goBtn(p.go,"Read the procedure")}
+  </div>`).join("");
+$$("#polFilters .chip").forEach(b=>b.addEventListener("click",()=>{
+  $$("#polFilters .chip").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  $$("#policies .policy").forEach(p=>p.classList.toggle("hide",b.dataset.s!=="all"&&p.dataset.s!==b.dataset.s));
+}));
+
+/* ============================================================
+   Traps + checklists
+   ============================================================ */
+$("#trapList").innerHTML=TRAPS.map(([m,f,go])=>`<div class="trap"><span class="m">${m}</span><span class="f">${f}</span><button type="button" data-go="${go}">See how to handle it</button></div>`).join("");
+$("#checks").innerHTML=CHECKS.map((c,ci)=>`<div class="checkset"><h3>${c.t}</h3>${c.i.map((x,i)=>`<label><input type="checkbox" id="ck-${ci}-${i}"><span>${x}</span></label>`).join("")}</div>`).join("");
+$("#clearChecks").addEventListener("click",()=>{$$("#checks input").forEach(i=>i.checked=false);toast("Checks cleared")});
+
+/* Request form link slot */
+if(LINKS.requestForm){$("#formLinkSlot").innerHTML=`: <a href="${LINKS.requestForm}" target="_blank" rel="noopener">open the form</a>`}
+
+/* ============================================================
+   Accordions: stage accordions become searchable + linkable
+   ============================================================ */
+$$(".acc").forEach(d=>{
+  const st=d.closest(".stage");
+  d.dataset.idx="";d.dataset.where=`Stage ${st.dataset.stage}: ${STAGES[st.dataset.stage-1]}`;
+  const sum=$("summary",d);
+  sum.insertAdjacentHTML("afterbegin",chev);
+  sum.insertAdjacentHTML("beforeend",`<button class="link-btn" type="button" aria-label="Copy link to ${esc(d.dataset.title)}">${linkIcon}<span class="word">Copy link</span></button>`);
+  $(".link-btn",sum).addEventListener("click",e=>{
+    e.preventDefault();e.stopPropagation();
+    const url=location.href.split("#")[0]+"#"+d.id;
+    const done=()=>toast("Link copied");
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(url).then(done,()=>fallbackCopy(url,done))}else fallbackCopy(url,done);
+  });
+});
+function fallbackCopy(text,cb){const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");cb()}catch(e){toast("Copy this link: "+text)}ta.remove()}
+
+/* ============================================================
+   Navigation: go(id)
+   ============================================================ */
+function go(id, push=true){
+  const el=document.getElementById(id); if(!el) return;
+  const tab=el.dataset.tab || (el.closest(".panel")&&el.closest(".panel").id.replace("panel-",""));
+  if(tab) selectTab(tab);
+  if(el.tagName==="DETAILS") el.open=true;
+  let p=el.parentElement; while(p){if(p.tagName==="DETAILS")p.open=true;p=p.parentElement}
+  if(el.tagName==="TR"){const i=+el.dataset.i;if(!picked.includes(i))togglePick(i)}
+  if(el.closest(".policy")||el.classList.contains("policy")){$$("#polFilters .chip").forEach((x,i)=>x.setAttribute("aria-pressed",i===0));$$("#policies .policy").forEach(p=>p.classList.remove("hide"))}
+  if(el.tagName==="TR"&&el.classList.contains("hide")){activeFilters.clear();$$("#carrierFilters .chip").forEach(b=>b.setAttribute("aria-pressed","false"));applyFilters()}
+  requestAnimationFrame(()=>{
+    const y=el.getBoundingClientRect().top+window.scrollY-($(".routebar").offsetHeight+16);
+    window.scrollTo({top:y,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+    el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");
+  });
+  if(push&&history.replaceState){try{history.replaceState(null,"","#"+id)}catch(e){}}
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-go]"); if(!b) return;
+  e.preventDefault(); go(b.dataset.go);
+});
+
+/* ============================================================
+   Search palette
+   ============================================================ */
+let INDEX=[];
+function buildIndex(){
+  INDEX=$$("[data-idx]").map(el=>{
+    const clone=el.cloneNode(true);$$(".link-btn,.golink,.chev,.stage-tag,summary",clone).forEach(x=>x.remove());
+    if(el.classList.contains("policy"))$$("h4",clone).forEach(x=>x.remove());
+    const parts=[],tw=document.createTreeWalker(clone,NodeFilter.SHOW_TEXT);while(tw.nextNode())parts.push(tw.currentNode.nodeValue);
+    const title=el.dataset.title||"";let text=parts.join(" ").replace(/\s+/g," ").replace(/ ([.,:;!?])/g,"$1").trim();
+    if(text.toLowerCase().startsWith(title.toLowerCase()))text=text.slice(title.length).trim();
+    return {id:el.id,title,where:el.dataset.where||"",text}
+  });
+}
+buildIndex();
+const pal=$("#palette"), q=$("#q"), results=$("#results");
+let sel=0, lastFocus=null;
+const SUGGEST=["deposit","quote only","name change","deviation","schedule change","middle name","group name","Delta","United"];
+function openSearch(){lastFocus=document.activeElement;pal.classList.add("open");q.value="";renderResults();q.focus()}
+function closeSearch(){pal.classList.remove("open");if(lastFocus)lastFocus.focus()}
+function hl(s,terms){let out=esc(s);terms.forEach(t=>{if(t.length<2)return;out=out.replace(new RegExp("("+t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","ig"),"<mark>$1</mark>")});return out}
+function snippet(text,terms){
+  const low=text.toLowerCase();let at=-1;for(const t of terms){const i=low.indexOf(t);if(i>-1&&(at<0||i<at))at=i}
+  if(at<0)return text.slice(0,140)+(text.length>140?"…":"");
+  const s=Math.max(0,at-50),e=Math.min(text.length,at+110);
+  return (s>0?"…":"")+text.slice(s,e)+(e<text.length?"…":"");
+}
+function renderResults(){
+  const raw=q.value.trim().toLowerCase();
+  if(!raw){
+    results.innerHTML=`<div class="pal-empty">Try a situation, a carrier, or a rule.<div class="pal-suggest">${SUGGEST.map(s=>`<button class="chip" type="button" data-sug="${s}">${s}</button>`).join("")}</div></div>`;
+    $$("[data-sug]",results).forEach(b=>b.addEventListener("click",()=>{q.value=b.dataset.sug;renderResults();q.focus()}));return;
+  }
+  const terms=raw.split(/\s+/).filter(Boolean);
+  const scored=INDEX.map(r=>{
+    const T=r.title.toLowerCase(),X=r.text.toLowerCase(),W=r.where.toLowerCase();let sc=0;
+    for(const t of terms){if(T.includes(t))sc+=10;else if(X.includes(t)||W.includes(t))sc+=2;else return null}
+    if(T.includes(raw))sc+=15; if(r.where.startsWith("Stage"))sc+=1;
+    return {r,sc};
+  }).filter(Boolean).sort((a,b)=>b.sc-a.sc).slice(0,10);
+  sel=0;
+  if(!scored.length){results.innerHTML=`<div class="pal-empty"><b>No matches for "${esc(q.value)}".</b> Try one word, like deposit or seats, or open the Find a task tab.</div>`;return}
+  results.innerHTML=scored.map(({r},i)=>`<button class="res" type="button" role="option" aria-selected="${i===0}" data-id="${r.id}"><div class="where">${esc(r.where)}</div><div class="t">${hl(r.title,terms)}</div><div class="s">${hl(snippet(r.text,terms),terms)}</div></button>`).join("");
+  $$(".res",results).forEach(b=>b.addEventListener("click",()=>{closeSearch();go(b.dataset.id)}));
+}
+function moveSel(d){const items=$$(".res",results);if(!items.length)return;sel=(sel+d+items.length)%items.length;items.forEach((x,i)=>x.setAttribute("aria-selected",i===sel));items[sel].scrollIntoView({block:"nearest"})}
+q.addEventListener("input",renderResults);
+q.addEventListener("keydown",e=>{
+  if(e.key==="ArrowDown"){e.preventDefault();moveSel(1)}
+  else if(e.key==="ArrowUp"){e.preventDefault();moveSel(-1)}
+  else if(e.key==="Enter"){const it=$$(".res",results)[sel];if(it){closeSearch();go(it.dataset.id)}}
+});
+pal.addEventListener("click",e=>{if(e.target===pal)closeSearch()});
+$$("[data-open-search]").forEach(b=>b.addEventListener("click",openSearch));
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&pal.classList.contains("open")){closeSearch();return}
+  const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if((e.key==="/"&&!typing)||((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k")){e.preventDefault();openSearch()}
+});
+
+/* ============================================================
+   Route progress: plane follows your place in the journey
+   ============================================================ */
+let lastCur=-2;
+const stageEls=$$(".stage"), routeLis=$$("#route li"), fill=$("#routeFill"), plane=$("#plane");
+function updateRoute(){
+  const off=$(".routebar").offsetHeight+window.innerHeight*0.3;
+  let cur=-1, frac=0;
+  stageEls.forEach((s,i)=>{const r=s.getBoundingClientRect();if(r.top<=off){cur=i;frac=Math.min(1,Math.max(0,(off-r.top)/Math.max(1,r.height)))}});
+  const last=stageEls[stageEls.length-1].getBoundingClientRect();
+  if(cur===stageEls.length-1&&last.bottom<off)frac=1;
+  const pct = cur<0 ? 0 : Math.min(100,((cur+frac*(cur<stageEls.length-1?1:0))/(stageEls.length-1))*100);
+  fill.style.width=pct+"%"; plane.style.left=pct+"%";
+  routeLis.forEach((li,i)=>{li.classList.toggle("on",i===cur);li.classList.toggle("done",i<cur)});
+  if(cur!==lastCur){lastCur=cur;const sc=$(".route-scroll");if(sc.scrollWidth>sc.clientWidth&&cur>-1){const li=routeLis[cur];sc.scrollTo({left:li.offsetLeft-sc.clientWidth/2+li.offsetWidth/2,behavior:"smooth"})}}
+}
+let ticking=false;
+window.addEventListener("scroll",()=>{if(!ticking){requestAnimationFrame(()=>{updateRoute();ticking=false});ticking=true}},{passive:true});
+window.addEventListener("resize",updateRoute);
+updateRoute();
+
+/* Open a deep link on load */
+if(location.hash.length>1){const id=decodeURIComponent(location.hash.slice(1));setTimeout(()=>go(id,false),60)}
+</script>
+</body>
+</html>
